@@ -150,44 +150,93 @@ const Home = () => {
         </div>
       </section>
 
-      {/* explore section */}
-      {/* Note , replace bg with image */}
-      <section className="bg-amber-950">
-        <div className="p-20 w-full flex flex-col items-center justify-center gap-10">
-          <div className="flex items-center justify-center gap-3">
-            <div className="w-5 sm:w-15 h-0.5 rounded-full bg-white" />
-            <div className="text-white font-bold px-2">
+      {/* Explore and Sponser Section*/}
+      <section
+        className="relative w-full bg-cover bg-center bg-red-950 bg-no-repeat h-fit"
+        style={{ backgroundImage: "url('/Images/Home/red-royal-bg.png')" }}
+      >
+        <div className="absolute inset-0 bg-black/40 pointer-events-none" />
+
+        <div className="relative px-6 sm:px-10 lg:px-20 py-20 flex flex-col items-center gap-14">
+
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-0.5 bg-white/80 rounded-full" />
+            <span className="text-white text-sm sm:text-base tracking-wide">
               On Stage and Beyond
-            </div>
-            <div className="w-5 sm:w-15 h-0.5 rounded-full bg-white" />
+            </span>
+            <div className="w-12 h-0.5 bg-white/80 rounded-full" />
           </div>
 
           <div
-            className="w-full max-w-150 h-9 bg-contain bg-center bg-no-repeat"
+            className="w-full max-w-160 h-12 bg-contain bg-center bg-no-repeat"
             style={{ backgroundImage: "url('/Images/Home/EXPLORE.png')" }}
           />
-        </div>
-        <div className="w-full flex justify-center px-10 pb-20">
-          <div className="w-full max-w-150 flex flex-col gap-10">
 
-            <div className="flex w-full justify-between items-stretch">
+          <div className="w-full max-w-300 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 place-items-center">
+            {[
+              { img: "/Images/Home/pro-shows.png", title: "Explore Shows" },
+              { img: "/Images/Home/Street-Activities.png", title: "Join The Fun" },
+              { img: "/Images/Home/competition.png", title: "Compete Now" }
+            ].map((item, i) => (
               <div
-                className="w-full h-40 bg-contain bg-center bg-no-repeat"
-                style={{ backgroundImage: "url('/Images/Home/pro-shows.png')" }}
-              />
-              <div
-                className="w-full h-40 bg-contain bg-center bg-no-repeat"
-                style={{ backgroundImage: "url('/Images/Home/Street-Activities.png')" }}
-              />
-              <div
-                className="w-full h-40 bg-contain bg-center bg-no-repeat"
-                style={{ backgroundImage: "url('/Images/Home/competition.png')" }}
-              />
+                key={i}
+                className="group w-full max-w-80 rounded-4xl overflow-hidden bg-[#2a0e12]/80 border border-white/20 shadow-xl hover:-translate-y-2 transition-all duration-300"
+              >
+                <div
+                  className="w-full h-56 bg-cover bg-center"
+                  style={{ backgroundImage: `url('${item.img}')` }}
+                />
+                <div className="px-6 py-4 bg-[#7a4a2e] text-center text-white font-semibold tracking-wide">
+                  {item.title}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+
+        {/* GUEST SECTION IN BETWEEN */}
+
+        {/* Sponsers */}
+        <div className="absolute inset-0 bg-black/40" />
+        <div className="relative mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-20">
+
+          <div className="mb-14">
+            <h2 className="text-[#D4AF37] text-3xl tracking-widest font-semibold">
+              SPONSORS
+            </h2>
+          </div>
+
+          {/* Left -> Right */}
+          <div className="overflow-hidden mb-10">
+            <div
+              className="flex gap-6 w-max animate-[marquee-right_25s_linear_infinite]"
+            >
+              {[...Array(10), ...Array(10)].map((_, i) => (
+                <div
+                  key={`top-${i}`}
+                  className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20"
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Right → Left */}
+          <div className="overflow-hidden">
+            <div
+              className="flex gap-6 w-max animate-[marquee-left_25s_linear_infinite]"
+            >
+              {[...Array(10), ...Array(10)].map((_, i) => (
+                <div
+                  key={`bottom-${i}`}
+                  className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20"
+                />
+              ))}
             </div>
           </div>
         </div>
-      </section>
 
+      </section>
     </div>
   )
 }
