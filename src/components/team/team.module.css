@@ -1,0 +1,173 @@
+/* components/team/team.module.css */
+
+.teamSection {
+  background: #000;
+  padding: 64px 0;
+}
+
+/* =====================
+   GROUP LAYOUT
+   ===================== */
+
+.group {
+  width: 100%;
+}
+
+.group:not(:last-child) {
+  margin-bottom: 56px;
+}
+
+/* =====================
+   TITLE + RED LINE
+   ===================== */
+
+.titleRow {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.title {
+  font-family: "Besta Baru", system-ui, sans-serif;
+  font-size: 2.5rem;
+  letter-spacing: 0.19em;
+  font-weight: 500;
+  color: #f5f5f5;
+  background: #000;
+  padding: 0 32px;
+  z-index: 2;
+}
+
+.line {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: calc(100% - 160px);
+  height: 2px;
+  background: linear-gradient(to right,
+      transparent 0%,
+      rgba(123, 15, 31, 0.9) 20%,
+      rgba(123, 15, 31, 1) 50%,
+      rgba(123, 15, 31, 0.9) 80%,
+      transparent 100%);
+  box-shadow: 0 0 6px rgba(123, 15, 31, 0.6);
+}
+
+/* =====================
+   MEMBERS GRID
+   ===================== */
+
+.membersGrid {
+  display: grid;
+
+  /* LEFT | EMPTY CENTER | RIGHT */
+  grid-template-columns: 260px 320px 260px;
+
+  row-gap: 28px;
+  column-gap: 0;
+
+  justify-content: center;
+}
+
+
+
+
+
+
+/* =====================
+   MEMBER ITEM
+   ===================== */
+
+.member {
+  width: 100%;
+}
+
+
+.memberName {
+  font-family: "Gabarito", system-ui, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #eaeaea;
+}
+
+.memberRole {
+  margin-top: 4px;
+  font-family: "Gabarito", system-ui, sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: #9a9a9a;
+}
+
+/* Constrains text content to readable width */
+.membersWrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+
+/* =====================
+   RESPONSIVE
+   ===================== */
+
+/* =====================
+   RESPONSIVE (MOBILE)
+   ===================== */
+
+@media (max-width: 768px) {
+
+  /* Title */
+  .title {
+    font-size: 1.05rem;
+    letter-spacing: 0.24em;
+    padding: 0 16px;
+  }
+
+  /* Red line */
+  .line {
+    width: calc(100% - 64px);
+    height: 2px;
+  }
+
+  /* Members layout */
+  /* Members layout */
+  .desktopLayout {
+    display: none;
+  }
+
+  .mobileLayout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 32px;
+    margin-top: 24px;
+    width: 100%;
+  }
+
+  /* Reset alignment for mobile specific items if needed, 
+     though .center class on TeamMember should handle it */
+}
+
+/* Desktop-only visibility */
+@media (min-width: 769px) {
+  .mobileLayout {
+    display: none;
+  }
+}
+
+.left {
+  grid-column: 1;
+  text-align: right;
+}
+
+.right {
+  grid-column: 3;
+  text-align: left;
+}
+
+.center {
+  text-align: center;
+  width: 100%;
+}

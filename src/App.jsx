@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 
 //import Product from "./components/Product"
 import Sponsors from "./pages/Sponsors";
+import Teams from "./pages/Teams";
 
 
 function App() {
@@ -21,6 +22,9 @@ function App() {
 
       {/* Sponsors route */}
       <Route path="/sponsors" element={<Sponsors />} />
+      {/* Teams route */}
+      <Route path="/teams" element={<Teams />} />
+      
 
       {/* Razorpay demo route (optional for later) */}
       {/* <Route path="/payment-test" element={<Product />} /> */}
