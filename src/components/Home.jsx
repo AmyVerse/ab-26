@@ -10,24 +10,12 @@ const Home = () => {
     { content: "Contact Us", to: '/' }
   ]
 
-
-
-
-
-
-
-
-
-
-
   const scrollHandler = () => {
     window.scrollTo({
       top: window.innerHeight,
       behavior: "smooth"
     })
   }
-
-
 
   const topSponsors = [
     { logo: "/Images/Sponsors/s1.png", alt: "Sponsor 1" },
