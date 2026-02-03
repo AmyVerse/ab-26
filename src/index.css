@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@500&display=swap');
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'Adqila';
+  src: url('/fonts/aqila-demoversion-regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
