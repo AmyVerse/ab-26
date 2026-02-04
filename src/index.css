@@ -1,1 +1,13 @@
 @import "tailwindcss";
+
+html,
+body,
+#root {
+  font-family: "Gabarito", ui-sans-serif, system-ui, sans-serif;
+}
+
+@theme {
+  --font-family-sans:
+    "Gabarito", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
