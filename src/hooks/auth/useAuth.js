@@ -31,6 +31,7 @@ const useAuth = () => {
       },
       { replace: true },
     );
+    window.history.go(-1);
   }, [setSearchParams]);
 
   // navigation

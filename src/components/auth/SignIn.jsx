@@ -126,7 +126,7 @@ const SignIn = ({
             <button
               onClick={handleGoogleSubmit}
               type="button"
-              className="p-2 sm:p-3 border-2 tracking-wider border-gray-600  text-lg sm:text-xl font-medium cursor-pointer transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed hover:bg-[#3c09191e]"
+              className="p-2 sm:p-3 border-2 -mt-2 md:-mt-3 tracking-wider border-gray-600  text-lg sm:text-xl font-medium cursor-pointer transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed hover:bg-[#3c09191e]"
               disabled={isGoogleLoading}
             >
               {isGoogleLoading ? "Signing In..." : "Continue with Google"}

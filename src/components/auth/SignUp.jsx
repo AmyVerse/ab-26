@@ -1,3 +1,4 @@
+import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { useToast } from "../../contexts/ToastContext";
 import useAuth from "../../hooks/auth/useAuth";
@@ -140,7 +141,6 @@ const SignUp = ({ onSwitchToSignIn, currentStep = 1 }) => {
                 <input
                   type="date"
                   name="dateOfBirth"
-                  required
                   value={formData.dateOfBirth}
                   onChange={handleChange}
                   onClick={(e) => e.target.showPicker?.()}
@@ -242,13 +242,40 @@ const SignUp = ({ onSwitchToSignIn, currentStep = 1 }) => {
 
       {/* Right side - Form content */}
       <div className="w-full md:w-1/2 flex flex-col bg-white rounded-r-lg relative">
-        <div className="flex items-center justify-center p-6 flex-1">
+        <div className="flex items-center justify-center pt-16 p-6 flex-1">
           <div className="w-full">
+            {/* back button */}
+            {currentStep > 1 && (
+              <motion.button
+                initial={{ opacity: 0, x: 10 }} // Starts slightly to the left and invisible
+                animate={{ opacity: 1, x: 0 }} // Slides in and fades on
+                exit={{ opacity: 0, x: 10 }} // Slides out when going back to Step 1
+                transition={{ duration: 0.2 }}
+                onClick={prevStep}
+                className="absolute top-6 left-6 text-gray-500 hover:text-[#3C0919] flex items-center gap-1 transition-colors text-sm font-medium z-20"
+              >
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 19l-7-7 7-7"
+                  />
+                </svg>
+                Back
+              </motion.button>
+            )}
+
             <div className="mb-3 sm:mb-5">
               <h2 className="text-3xl sm:text-4xl font-semibold text-gray-900">
                 Create Your Account
               </h2>
-              <p className="text-gray-500 text-base sm:text-md font-normal">
+              <p className="text-gray-500 text-sm sm:text-lg font-medium">
                 Join Abhivyakti'26 and register for events, updates, and
                 participation.
               </p>
@@ -266,7 +293,18 @@ const SignUp = ({ onSwitchToSignIn, currentStep = 1 }) => {
               onSubmit={handleContinue}
               className="flex flex-col gap-4 sm:gap-6"
             >
-              {renderStepContent()}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentStep}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.2, ease: "easeInOut" }}
+                  className="flex flex-col gap-4 sm:gap-6"
+                >
+                  {renderStepContent()}
+                </motion.div>
+              </AnimatePresence>
 
               <button
                 type="submit"
@@ -283,7 +321,7 @@ const SignUp = ({ onSwitchToSignIn, currentStep = 1 }) => {
               <button
                 onClick={handleGoogleSignUp}
                 type="button"
-                className="p-2 sm:p-3 border-2 border-gray-600 text-lg sm:text-xl font-medium cursor-pointer transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed hover:bg-[#3c09191e]"
+                className="p-2 sm:p-3 border-2 -mt-2 md:-mt-3 border-gray-600 text-lg sm:text-xl font-medium cursor-pointer transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed hover:bg-[#3c09191e]"
                 disabled={isLoading}
               >
                 Continue with Google
