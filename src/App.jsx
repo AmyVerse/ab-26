@@ -1,34 +1,47 @@
-
-import { Routes, Route } from "react-router-dom";
-// import Product from "./components/Razorpay/Product";
-
-//import Product from "./components/Product"
+import { useState } from "react";
+import { Route, Routes } from "react-router-dom";
+import ModalAuthLayout from "./components/auth/ModalAuthLayout";
+import Footer from "./components/common/Footer/Footer";
+import Navbar from "./components/common/Navbar/Navbar";
+import Home from "./components/home/Home";
+import NotFound from "./components/not-found/NotFound";
+import { ToastProvider } from "./contexts/ToastContext";
 import Sponsors from "./pages/Sponsors";
 import Teams from "./pages/Teams";
 
+function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 function App() {
   return (
-    <Routes>
-      {/* Home route */}
-      <Route
-        path="/"
-        element={
-          <h1 className="text-3xl font-bold underline text-cyan-500">
-            Hello Vite + React!
-          </h1>
-        }
-      />
+    // for toast
+    <ToastProvider>
+      <div className="min-h-screen">
+        {/* obv the navbar */}
+        <Navbar isLoggedIn={isLoggedIn} />
 
-      {/* Sponsors route */}
-      <Route path="/sponsors" element={<Sponsors />} />
-      {/* Teams route */}
-      <Route path="/teams" element={<Teams />} />
-      
+        {/* testing login state - TEMPORARY
+        <button
+          onClick={() => setIsLoggedIn(!isLoggedIn)}
+          className="fixed bottom-6 right-6 z-100 px-4 py-2 bg-blue-600 text-white rounded-lg shadow-lg hover:bg-blue-700 transition-colors font-medium"
+        >
+          {isLoggedIn ? "Logout" : "Login"}
+        </button> */}
 
-      {/* Razorpay demo route (optional for later) */}
-      {/* <Route path="/payment-test" element={<Product />} /> */}
-    </Routes>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="*" element={<NotFound />} />
+          {/* Sponsors route */}
+          <Route path="/sponsors" element={<Sponsors />} />
+          {/* Teams route */}
+          <Route path="/teams" element={<Teams />} />
+        </Routes>
+
+        <Footer />
+        {/* for auth modals, don't move this */}
+        <ModalAuthLayout />
+      </div>
+    </ToastProvider>
   );
 }
 
