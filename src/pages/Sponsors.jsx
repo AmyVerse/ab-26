@@ -3,9 +3,7 @@ import SponsorsTierSection from "../components/sponsors/SponsorsTierSection";
 import ComingSoon from "../components/common/ComingSoon/ComingSoon";
 
 const Sponsors = () => {
-  const tierOne = [
-    { name: "Sponsor 1", logo: null },
-  ];
+  const tierOne = [{ name: "Sponsor 1", logo: null }];
 
   const tierTwo = [
     { name: "Sponsor 2", logo: null },
@@ -20,14 +18,12 @@ const Sponsors = () => {
   return (
     <main className="sponsorsPage">
       <HeroSection />
-      {/* <SponsorsTierSection title="TITLE SPONSER" sponsors={tierOne} />
-  <SponsorsTierSection title="PLATINUM SPONSORS" sponsors={tierTwo} />
-  <SponsorsTierSection title="GOLD SPONSORS" sponsors={tierThree} /> */}
+      <SponsorsTierSection title="TITLE SPONSER" sponsors={tierOne} />
+      <SponsorsTierSection title="PLATINUM SPONSORS" sponsors={tierTwo} />
+      <SponsorsTierSection title="GOLD SPONSORS" sponsors={tierThree} />
       <ComingSoon />
     </main>
-
   );
 };
 
 export default Sponsors;
-

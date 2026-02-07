@@ -27,7 +27,7 @@ const Hero = () => {
   return (
     <section
       className="w-full pt-20 h-screen bg-center bg-no-repeat bg-cover"
-      style={{ backgroundImage: "url('/hero.png')" }}
+      style={{ backgroundImage: "url('/hero.webp')" }}
     >
       <div className="absolute inset-0 bg-black/40"></div>
       <div className="w-full h-full flex flex-col justify-between relative">
@@ -116,7 +116,7 @@ const Hero = () => {
             2026
           </motion.div>
         </div>
-        <div className="p-6 w-full h-fit flex flex-col md:flex-row gap-x-6 gap-y-3">
+        <div className="p-6 w-full h-fit flex flex-col md:flex-row gap-x-10 gap-y-3">
           <div className="w-full md:w-fit flex justify-center items-center gap-2">
             <div className="flex flex-col md:flex-row md:gap-4 items-center">
               <div className="h-10 aspect-square">
@@ -136,7 +136,7 @@ const Hero = () => {
               </div>
             </div>
           </div>
-          <div className="w-full flex items-center gap-2.5">
+          <div className="w-full flex items-center gap-3">
             <div className="w-[calc((100%-150px)/2)] h-0.5 rounded-full bg-white"></div>
             <div className="w-fit text-white font-bold whitespace-nowrap">
               19-21st March 2026
@@ -146,7 +146,7 @@ const Hero = () => {
           <div className="w-full md:w-fit h-full grid place-items-center">
             <button
               type="button"
-              className="mt-2.5 md:mt-0 w-10 aspect-square rounded-2xl bg-contain bg-center bg-no-repeat duration-300 active:scale-85"
+              className="mt-2.5 md:mt-0 w-10 bg-amber-400 cursor-pointer aspect-square rounded-2xl bg-contain bg-center bg-no-repeat duration-300 active:scale-85"
               onClick={scrollHandler}
               style={{ backgroundImage: "url('/Images/Home/arrow.png')" }}
             ></button>

@@ -4,11 +4,12 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import ModalAuthLayout from "./components/auth/ModalAuthLayout";
 import Footer from "./components/common/Footer/Footer";
 import Navbar from "./components/common/Navbar/Navbar";
-import Home from "./components/home/Home";
 import NotFound from "./components/not-found/NotFound";
 import { ToastProvider } from "./contexts/ToastContext";
+import Developers from "./pages/Developers";
 import Sponsors from "./pages/Sponsors";
 import Teams from "./pages/Teams";
+import Home from "./pages/Home";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -68,6 +69,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
           <Route path="/sponsors" element={<Sponsors />} />
           <Route path="/teams" element={<Teams />} />
+          <Route path="/developers" element={<Developers />} />
         </Routes>
 
         <Footer />
