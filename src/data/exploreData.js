@@ -43,5 +43,29 @@ export const exploreData = {
             image: "/images/explore/shawn.jpg",
             layout: "image-left",
         },
+        {
+            id: "street-2",
+            artistName: "Street Act 2",
+            genre: "Street Performance",
+            description:
+                "A captivating live experience with [Artist Name], known for [distinct style/strength—e.g., soulful vocals, electrifying performances]. Witness an evening filled with [emotion / energy / artistry] as music comes alive on stage. A captivating live experience with [Artist Name], known for [distinct style/strength—e.g., soulful vocals, electrifying performances]. Witness an evening filled with [emotion / energy / artistry] as music comes alive on stage.",
+            date: "22/03/26",
+            venue: "Campus Streets",
+            time: "All Day",
+            image: "/images/explore/shawn.jpg",
+            layout: "image-right",
+        },
+        {
+            id: "street-3",
+            artistName: "Street Act 3",
+            genre: "Street Performance",
+            description:
+                "A captivating live experience with [Artist Name], known for [distinct style/strength—e.g., soulful vocals, electrifying performances]. Witness an evening filled with [emotion / energy / artistry] as music comes alive on stage. A captivating live experience with [Artist Name], known for [distinct style/strength—e.g., soulful vocals, electrifying performances]. Witness an evening filled with [emotion / energy / artistry] as music comes alive on stage.",
+            date: "22/03/26",
+            venue: "Campus Streets",
+            time: "All Day",
+            image: "/images/explore/shawn.jpg",
+            layout: "image-left",
+        },
     ],
 };

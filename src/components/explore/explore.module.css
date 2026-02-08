@@ -205,16 +205,30 @@
 .meta {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    margin-top: 8px;
-    gap: 16px;
+    align-items: center;
+    margin-top: 12px;
 }
 
 .metaItem {
     font-family: "Gabarito", system-ui, sans-serif;
     font-size: 18px;
-    color: #e6e6e6;
+    color: #ffffff;
     letter-spacing: 0.02em;
 }
+
+/* alignment per column */
+.metaItem:first-child {
+    text-align: left;
+}
+
+.metaItem:nth-child(2) {
+    text-align: center;
+}
+
+.metaItem:last-child {
+    text-align: right;
+}
+
 
 /* ---------------------
    BUTTON
@@ -232,8 +246,13 @@
     background: transparent;
     color: #ffffff;
 
-    border: 1px solid rgba(255, 255, 255, 0.6);
+    border: 0.8px solid rgba(255, 241, 194, 1);
     cursor: pointer;
+    width: 153px;
+    height: 40px;
+    border-radius: 7px;
+
+
 
     transition:
         border 0.25s ease,
@@ -241,8 +260,8 @@
 }
 
 .button:hover {
-    background: rgba(255, 255, 255, 0.06);
-    border-color: var(--gold-300, #ffde91);
+    background: linear-gradient(180deg, #a3263a, #6e1421);
+    /* box-shadow: 0 6px 18px rgba(163, 38, 58, 0.45); */
 }
 
 
