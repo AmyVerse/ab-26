@@ -4,7 +4,7 @@ const About = () => {
   return (
     <section
       className="w-full h-fit bg-cover bg-center relative"
-      style={{ backgroundImage: "url('/Images/Home/image2.jpg')" }}
+      style={{ backgroundImage: "url('/images/Home/image2.jpg')" }}
     >
       <div className="w-full h-full backdrop-blur-xs bg-black/75">
         <div className="w-full min-h-screen flex flex-col">
@@ -50,12 +50,12 @@ const About = () => {
                 delay: 2,
               }}
               className="w-full max-w-150 h-16 bg-contain bg-center bg-no-repeat"
-              style={{ backgroundImage: "url('/Images/Home/aboutab.png')" }}
+              style={{ backgroundImage: "url('/images/Home/aboutab.png')" }}
             ></motion.div>
             <div className="grow sm:px-3 py-6 w-full flex flex-col md:flex-row justify-evenly items-center gap-6">
               <div className="max-w-110">
                 <img
-                  src="/Images/Home/magician.png"
+                  src="/images/Home/magician.png"
                   alt="Magician"
                   className="w-full h-full object-contain"
                 />

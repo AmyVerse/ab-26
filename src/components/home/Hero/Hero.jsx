@@ -34,7 +34,7 @@ const Hero = () => {
         {/* <div className="px-6 py-3 w-full flex items-center justify-between gap-2.5">
           <div className="w-16 aspect-square">
             <img
-              src="/Images/Home/ablogo.png"
+              src="/images/Home/ablogo.png"
               alt="AB Logo"
               className="invert w-full h-full aspect-square"
             />
@@ -83,7 +83,7 @@ const Hero = () => {
           <div className="h-32 w-180 relative" style={{ scale: scale }}>
             <div
               className="h-full bg-contain bg-center bg-no-repeat"
-              style={{ backgroundImage: "url('/Images/Home/ab.png')" }}
+              style={{ backgroundImage: "url('/images/Home/ab.png')" }}
             ></div>
             <motion.div
               animate={{
@@ -100,7 +100,7 @@ const Hero = () => {
               }}
               className="absolute top-7 left-[calc(50%+2px)] z-10"
             >
-              <img src="/Images/Home/y.png" alt="" className="h-22.5" />
+              <img src="/images/Home/y.png" alt="" className="h-22.5" />
             </motion.div>
           </div>
           <motion.div
@@ -121,7 +121,7 @@ const Hero = () => {
             <div className="flex flex-col md:flex-row md:gap-4 items-center">
               <div className="h-10 aspect-square">
                 <img
-                  src="/Images/Home/iiitn.png"
+                  src="/images/Home/iiitn.png"
                   alt="IIITN"
                   className="h-full aspect-square"
                 />
@@ -148,7 +148,7 @@ const Hero = () => {
               type="button"
               className="mt-2.5 md:mt-0 w-10 bg-amber-400 cursor-pointer aspect-square rounded-2xl bg-contain bg-center bg-no-repeat duration-300 active:scale-85"
               onClick={scrollHandler}
-              style={{ backgroundImage: "url('/Images/Home/arrow.png')" }}
+              style={{ backgroundImage: "url('/images/Home/arrow.png')" }}
             ></button>
           </div>
         </div>
