@@ -1,5 +1,5 @@
-import SponsorCard from "./sponserCard";
 import "../GuestsSpeakers/GuestsSpeakers.css";
+import SponsorCard from "./sponserCard";
 
 const Sponsors = () => {
   const topSponsors = [
@@ -26,10 +26,11 @@ const Sponsors = () => {
 
   return (
     <div className="relative pb-20">
-
-
       <div className="relative z-10 w-full px-6 sm:px-10 lg:px-20 mb-8 sm:mb-12">
-        <div className="w-full h-8 sm:h-12 bg-contain bg-no-repeat bg-left" />
+        <div
+          className="w-full h-8 sm:h-12 bg-contain bg-no-repeat bg-left"
+          style={{ backgroundImage: "url('/images/Home/SPONSERS.png')" }}
+        />
       </div>
 
       <div className="relative z-10 w-full flex flex-col gap-8 sm:gap-12">
