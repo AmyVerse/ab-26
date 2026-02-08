@@ -1,0 +1,170 @@
+.explore-hero {
+    position: relative;
+    min-height: 100svh;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  /* =========================
+     BACKGROUND
+  ========================= */
+  .explore-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center top;
+    z-index: 1;
+  }
+  
+  /* =========================
+     STAGE (cards + EXPLORE)
+  ========================= */
+  .explore-stage {
+    position: absolute;
+    bottom: 35%;
+  
+    /* OPTICAL CENTER — intentional */
+    left: 20%;
+    transform: translateX(-52%);
+  
+    z-index: 3;
+  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* =========================
+     EXPLORE TITLE
+  ========================= */
+  .explore-title {
+    position: absolute;
+  
+    /* place it ON the cards */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  
+    font-family: "BudmoJigglish", serif;
+    font-size: clamp(3.2rem, 6.5vw, 7.5rem);
+    letter-spacing: 0.26em;
+    color: #d4af37;
+  
+    text-align: center;
+    z-index: 5;
+  
+    pointer-events: none;
+  
+    text-shadow:
+      0 -2px 6px rgba(212, 175, 55, 0.9);
+  }
+  
+  
+  /* =========================
+     CARDS
+  ========================= */
+  .explore-cards {
+    display: flex;
+    align-items: flex-end;
+    gap: clamp(16px, 3vw, 28px);
+  }
+  
+  .card-wrap {
+    display: flex;
+    align-items: flex-end;
+  }
+  
+  /* triangle formation */
+  .pos-0 { transform: translateY(36px); }
+  .pos-1 { transform: translateY(14px); }
+  .pos-2 { transform: translateY(-32px); }
+  .pos-3 { transform: translateY(14px); }
+  .pos-4 { transform: translateY(36px); }
+  
+  .explore-card {
+    height: clamp(240px, 38vh, 360px);
+    aspect-ratio: 9 / 16;
+    width: auto;
+  
+    border-radius: 18px;
+  }
+  
+  /* =========================
+     STATS
+  ========================= */
+  .explore-stats {
+    position: absolute;
+    bottom: 12%;
+  
+    left: 50%;
+    transform: translateX(-50%);
+  
+    display: flex;
+    gap: clamp(56px, 8vw, 140px);
+  
+    z-index: 4;
+    text-align: center;
+  }
+  
+  .stat {
+    width: 220px;
+  }
+  
+  .stat-num {
+    display: block;
+  
+    font-family: "Milker", serif;
+    font-weight: 400;
+    font-size: clamp(2.6rem, 5.5vw, 5.25rem);
+    letter-spacing: 0.23em;
+    line-height: 1;
+  
+    color: #DDB224;
+  }
+  
+  .stat-text {
+    margin-top: 10px;
+  
+    font-family: "Gabarito", system-ui, sans-serif;
+    font-weight: 400;
+    font-size: clamp(0.9rem, 1.6vw, 1.125rem);
+    letter-spacing: 0.10em;
+    line-height: 1.25;
+  
+    color: #ffffff;
+    white-space: normal;
+  }
+  
+  /* =========================
+     MOBILE / SHORT HEIGHT
+  ========================= */
+  @media (max-width: 768px), (max-height: 700px) {
+    .explore-stage {
+      bottom: 38%;
+      transform: translateX(-50%);
+    }
+  
+    .explore-title {
+      font-size: 3rem;
+      margin-bottom: 14px;
+    }
+  
+    .explore-cards {
+      gap: 12px;
+    }
+  
+    .explore-card {
+      height: clamp(160px, 26vh, 220px);
+    }
+  
+    .explore-stats {
+      flex-direction: column;
+      gap: 20px;
+      bottom: 6%;
+    }
+  
+    .stat {
+      width: auto;
+    }
+  }
+  

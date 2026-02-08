@@ -10,6 +10,7 @@ import Developers from "./pages/Developers";
 import Sponsors from "./pages/Sponsors";
 import Teams from "./pages/Teams";
 import Home from "./pages/Home";
+import Explore from "./pages/Explore";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -66,7 +67,7 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path="explore" element={<Explore />} />
           <Route path="/sponsors" element={<Sponsors />} />
           <Route path="/teams" element={<Teams />} />
           <Route path="/developers" element={<Developers />} />
