@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import ExploreHero from "@/components/explore/ExploreHero";
 import ExploreTabs from "../components/explore/ExploreTabs";
 import ExploreSection from "../components/explore/ExploreSection";
 
@@ -15,17 +16,21 @@ const Explore = () => {
     };
 
     return (
-        <main style={{ background: "#000", minHeight: "100vh" }}>
-            {/* Top Tabs */}
-            <ExploreTabs
-                activeTab={activeTab}
-                onTabChange={handleTabChange}
-            />
+        <main>
+            {/* Hero Section */}
+            <ExploreHero />
 
-            {/* Content Section */}
-            <ExploreSection
-                items={exploreData[activeTab]}
-            />
+            {/* Black background content */}
+            <section style={{ background: "#000", minHeight: "100vh" }}>
+                <ExploreTabs
+                    activeTab={activeTab}
+                    onTabChange={handleTabChange}
+                />
+
+                <ExploreSection
+                    items={exploreData[activeTab]}
+                />
+            </section>
         </main>
     );
 };

@@ -55,7 +55,7 @@ function App() {
       <ScrollToTop />
       <div className="min-h-screen">
         {/* obv the navbar */}
-        {/* <Navbar isLoggedIn={isLoggedIn} /> */}
+        <Navbar isLoggedIn={isLoggedIn} />
 
         {/* testing login state - TEMPORARY
         <button
@@ -67,7 +67,6 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="*" element={<NotFound />} />
           <Route path="/sponsors" element={<Sponsors />} />
           <Route path="/teams" element={<Teams />} />
           <Route path="/developers" element={<Developers />} />
