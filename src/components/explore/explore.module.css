@@ -5,16 +5,10 @@
 .tabsWrapper {
     display: flex;
     justify-content: space-between;
-    /* 👈 key change */
     align-items: flex-end;
-
     max-width: 1100px;
-    /* controls how far left/right they go */
     margin: 0 auto 0;
-    /* centers the whole group */
-
     padding: 0 24px;
-    /* breathing room on small screens */
 }
 
 
@@ -133,7 +127,6 @@
     height: 360px;
     overflow: hidden;
     background: #000;
-
     transition: box-shadow 0.4s ease;
 }
 
@@ -314,22 +307,21 @@
     .tabsWrapper {
         justify-content: space-between;
         align-items: flex-end;
-
         max-width: 100%;
-        margin: 32px auto 48px;
+        margin: 0 auto 0;
         padding: 0 12px;
-        /* tighter edges */
         gap: 12px;
-        /* controlled breathing */
+    }
+
+    .section {
+        padding: 48px 0 24px;
     }
 
     .tab {
         width: 120px;
-        /* 👈 major downscale */
         height: 44px;
 
         font-size: 14px;
-        /* 👈 reduced typography */
         font-weight: 400;
 
         border-top-left-radius: 12px;
