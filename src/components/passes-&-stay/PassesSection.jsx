@@ -64,7 +64,7 @@ const PassesSection = () => {
         }
     ];
 
-    const Card = ({ item }) => (
+    const Card = ({ item, className }) => (
         <motion.div
             className={styles.cardWrapper}
             initial="rest"
@@ -79,7 +79,7 @@ const PassesSection = () => {
                 }}
             />
             <motion.div
-                className={styles.card}
+                className={`${styles.card} ${className || ""}`}
                 variants={{
                     rest: { x: 0, y: 0 },
                     hover: { x: -8, y: -8, transition: { duration: 0.3, ease: "easeOut" } }
@@ -128,7 +128,7 @@ const PassesSection = () => {
                 </div>
                 <div className={styles.cardsGrid}>
                     {accommodation.map((stay, index) => (
-                        <Card key={index} item={stay} />
+                        <Card key={index} item={stay} className={styles.accommodationCard} />
                     ))}
                 </div>
             </div>

@@ -32,7 +32,7 @@ const Explore = () => {
           style={{ backgroundImage: "url('/images/Home/EXPLORE.png')" }}
         />
 
-        <div className="w-full max-w-275 mx-auto grid grid-cols-1 md:grid-cols-3 gap-y-24 md:gap-10 lg:gap-16 place-items-center mt-10">
+        <div className="w-full max-w-275 mx-auto flex flex-wrap justify-center gap-y-12 sm:gap-y-16 gap-x-10 lg:gap-x-16 mt-10">
           <ExploreCard
             bg="/images/Home/CARD-BACKGROUND.jpg"
             text="/images/Home/PRO-SHOW.png"

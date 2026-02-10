@@ -105,19 +105,22 @@
   
   .stat-num {
     display: block;
-    font-family: "Milker", serif;
+    font-family: "Cinzel Decorative", serif;
     font-size: clamp(2.6rem, 5.5vw, 5.25rem);
-    letter-spacing: 0.23em;
+    letter-spacing: 0.1em;
     color: #ddb224;
+    font-weight: 700;
   }
   
   .stat-text {
     display: block;
     margin-top: 10px;
-    font-family: "Gabarito", system-ui, sans-serif;
-    font-size: clamp(0.9rem, 1.6vw, 1.125rem);
-    letter-spacing: 0.1em;
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(1rem, 1.8vw, 1.4rem);
+    letter-spacing: 0.05em;
     color: #fff;
+    font-weight: 600;
+    text-transform: uppercase;
   }
   
   /* mobile fixes */

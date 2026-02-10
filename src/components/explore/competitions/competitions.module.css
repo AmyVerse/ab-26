@@ -16,7 +16,7 @@
     padding-right: 2rem;
     padding-left: 5rem; /* Increased left padding */
     padding-top: 4rem; 
-    padding-bottom: 2rem;
+    padding-bottom: 16rem;
     overflow-y: auto;
     overflow-x: visible;
     scrollbar-width: none; 
@@ -36,7 +36,7 @@
     
     /* Default state: heavily overlapped, only header visible */
     /* Using a fixed large negative margin to hide most of the ticket */
-    margin-bottom: -18rem; 
+    margin-bottom: -12rem; 
     
     filter: brightness(0.7) blur(0.5px);
     transform-origin: center top;
@@ -163,15 +163,11 @@
 /* Responsive Adjustments */
 
 /* Smoothly reduce overlap as screen gets smaller from 1920px down to 1280px */
-@media (max-width: 1700px) {
-    .ticketWrapper {
-        margin-bottom: -14rem; 
-    }
-}
+/* Removed 1700px query as -12rem base works well there */
 
 @media (max-width: 1550px) {
     .ticketWrapper {
-        margin-bottom: -11rem;
+        margin-bottom: -10rem;
     }
 }
 
@@ -197,7 +193,7 @@
     .ticketList {
         padding: 0;
         width: 100%;
-        padding-bottom: 5rem;
+        padding-bottom: 16rem;
     }
 
     /* Override Wrapper Styles for Mobile/Tablet */
