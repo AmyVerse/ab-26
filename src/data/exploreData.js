@@ -40,7 +40,7 @@ export const exploreData = {
           organizers: "Strokes",
           type: "Art Showcase",
           mode: "Offline",
-          bg_img: "/images/explore/events/1.jpg",
+          bg_img: "/images/explore/events/strokes.jpg",
 
           description: [
             "Immerse yourself in the world of imagination and expression with RangReza, the premier visual arts showcase of the fest. This event celebrates creativity in its purest form through strokes, textures, colors, and concepts that speak louder than words.",
@@ -141,7 +141,7 @@ export const exploreData = {
           organizers: "D-Traxia",
           type: "Solo Dance",
           mode: "Offline",
-          bg_img: "/images/explore/events/1.jpg",
+          bg_img: "/images/explore/events/dtaraxia.jpg",
 
           description: [
             "Step into the rhythm and own the stage — Showstopper is your chance to shine where every beat, every move, and every expression tells your story. This competition celebrates the art of solo dancing, bringing together performers who can mesmerize audiences with their grace, energy, and creativity.",
@@ -237,7 +237,7 @@ export const exploreData = {
           organizers: "D-Traxia",
           type: "Duo Dance",
           mode: "Offline",
-          bg_img: "/images/explore/events/1.jpg",
+          bg_img: "/images/explore/events/dtaraxia.jpg",
 
           description: [
             "Two hearts, one rhythm — ‘Melody Hustle’ is where chemistry meets choreography! This duo dance competition celebrates teamwork, coordination, and the magic that happens when two performers move as one. Whether it’s a soulful duet, energetic hip-hop, or classical fusion, this is your chance to showcase harmony, synchronization, and storytelling through dance. Any duo is allowed. Ex: boy & boy, girl & girl, boy & girl etc.",
@@ -333,7 +333,7 @@ export const exploreData = {
           organizers: "D-Traxia",
           type: "Group Dance",
           mode: "Offline",
-          bg_img: "/images/explore/events/1.jpg",
+          bg_img: "/images/explore/events/dtaraxia.jpg",
 
           description: [
             "Get ready to set the stage ablaze with rhythm, energy, and unbeatable team spirit! ‘Dance Squad’ is the ultimate group dance competition that celebrates synchronization, creativity, and unity in motion. It’s not just about dance — it’s about teamwork, power, and performance that leaves the audience spellbound.",
@@ -434,7 +434,7 @@ export const exploreData = {
           organizers: "Crescendo",
           type: "Battle of Bands",
           mode: "Offline",
-          bg_img: "/images/explore/events/1.jpg",
+          bg_img: "/images/explore/events/crescendo1.jpg",
 
           description: [
             "रागतरंगिनी(Raagtarangini) is the flagship Battle of Bands competition under Crescendo, designed to celebrate the spirit of live music, collaboration, and creative expression. This event provides an electrifying platform for college bands to showcase their musical synergy, technical prowess, and stage charisma through powerful live performances.",
@@ -494,7 +494,7 @@ export const exploreData = {
           organizers: "Crescendo",
           type: "Solo Singing",
           mode: "Offline",
-          bg_img: "/images/explore/events/1.jpg",
+          bg_img: "/images/explore/events/crescendo2.jpg",
 
           description: [
             "Swarasamar is a soulful celebration of music where individual voices take center stage. The event provides a platform for aspiring singers to express their emotions, creativity, and musical excellence. Participants will perform solo pieces showcasing their vocal talent, stage presence, and passion for melody. Let your voice be heard and your song touch hearts!",
@@ -551,7 +551,7 @@ export const exploreData = {
           organizers: "Crescendo",
           type: "Instrumental",
           mode: "Offline",
-          bg_img: "/images/explore/events/1.jpg",
+          bg_img: "/images/explore/events/crescendo1.jpg",
 
           description: [
             "Vādyotsava is a grand celebration of instrumental music where rhythm, melody, and mastery unite on one stage. This competition invites passionate musicians to showcase their skill, creativity, and synchronization through the pure language of sound. From the deep resonance of strings to the pulse of percussion, every note tells a story and every beat sets the stage alive.",
@@ -608,7 +608,7 @@ export const exploreData = {
           organizers: "Crescendo",
           type: "BGM Making",
           mode: "Online",
-          bg_img: "/images/explore/events/1.jpg",
+          bg_img: "/images/explore/events/crescendo2.jpg",
 
           description: [
             " BEATS BARRACK 2.0 is an online background music (BGM) making competition that provides a creative platform for aspiring composers and music producers. Participants create original BGMs that enhance visual storytelling, emotions, and cinematic narratives. The online finale challenges shortlisted teams to compose music for digitally provided visuals within a fixed time limit",
@@ -671,7 +671,7 @@ export const exploreData = {
           organizers: "Probe",
           type: "Ad Making",
           mode: "Offline",
-          bg_img: "/images/explore/events/1.jpg",
+          bg_img: "/images/explore/events/probe.png",
 
           description: [
             "Unleash your creativity and marketing genius at AdMads, where storytelling meets strategy! This is your stage to craft captivating advertisements that blend emotion, wit, and innovation into one unforgettable message.",
@@ -726,7 +726,7 @@ export const exploreData = {
           organizers: "Probe",
           type: "Short Film Making",
           mode: "Offline",
-          bg_img: "/images/explore/events/1.jpg",
+          bg_img: "/images/explore/events/probe.png",
 
           description: [
             "Step into the future of storytelling with Director’s Cut, where cinema meets interactivity. This is not a conventional short film contest. Participants must work within a given theme and create an immersive 5–10 minute short film where the audience actively influences how the story unfolds.",
@@ -813,7 +813,7 @@ export const exploreData = {
           organizers: "Probe",
           type: "Photography Challenge",
           mode: "Online",
-          bg_img: "/images/explore/events/1.jpg",
+          bg_img: "/images/explore/events/probe.png",
 
           description: [
             "See the world through your own Drishtikon — your unique way of seeing. The Photography Challenge at Abhivyakti 2026 goes online, inviting undergraduate students from across the country to capture stories that reflect their vision, emotion, and artistry.",
@@ -893,7 +893,7 @@ export const exploreData = {
           organizers: "Orator",
           type: "Model United Nations",
           mode: "Offline",
-          bg_img: "/images/explore/events/1.jpg",
+          bg_img: "/images/explore/events/abmun.jpg",
 
           description: [
             "Unleash your creativity and marketing genius at AdMads, where storytelling meets strategy! This is your stage to craft captivating advertisements that blend emotion, wit, and innovation into one unforgettable message.",
@@ -953,7 +953,7 @@ export const exploreData = {
           organizers: "Estoria",
           type: "MonoAct",
           mode: "Offline",
-          bg_img: "/images/explore/events/1.jpg",
+          bg_img: "/images/explore/events/estoria.jpg",
 
           description: [
             "BAHUMUKHI is a monoact competition that celebrates individuality, emotional depth, and the expressive power of theatre. The event provides performers with a platform to present compelling monologues and character-driven narratives through live performance.",
@@ -1025,7 +1025,7 @@ export const exploreData = {
           organizers: "Estoria",
           type: "Stage Play",
           mode: "Offline",
-          bg_img: "/images/explore/events/1.jpg",
+          bg_img: "/images/explore/events/estoria.jpg",
 
           description: [
             "BAHUMUKHI is a monoact competition that celebrates individuality, emotional depth, and the expressive power of theatre. The event provides performers with a platform to present compelling monologues and character-driven narratives through live performance.",
@@ -1097,7 +1097,7 @@ export const exploreData = {
           organizers: "Estoria",
           type: "Street Play",
           mode: "Offline",
-          bg_img: "/images/explore/events/1.jpg",
+          bg_img: "/images/explore/events/estoria.jpg",
 
           description: [
             "DAHAAD – “The Roar of Expression” – is a street play competition that celebrates the power of performance, dialogue, and message-driven storytelling. It provides a platform for teams to raise their voices on social issues through bold narratives and captivating street theatre.",
@@ -1159,7 +1159,7 @@ export const exploreData = {
           organizers: "Estoria",
           type: "Poetry",
           mode: "Online",
-          bg_img: "/images/explore/events/1.jpg",
+          bg_img: "/images/explore/events/estoria.jpg",
 
           description: [
             "DAHAAD – “The Roar of Expression” – is a street play competition that celebrates the power of performance, dialogue, and message-driven storytelling. It provides a platform for teams to raise their voices on social issues through bold narratives and captivating street theatre.",
@@ -1229,7 +1229,7 @@ export const exploreData = {
           organizers: "Central",
           type: "Treasure Hunt",
           mode: "Offline",
-          bg_img: "/images/explore/events/1.jpg",
+          bg_img: "/images/explore/events/abcentral.jpg",
 
           description: [],
 
@@ -1257,7 +1257,7 @@ export const exploreData = {
           organizers: "Central",
           type: "DJ Wars",
           mode: "Offline",
-          bg_img: "/images/explore/events/1.jpg",
+          bg_img: "/images/explore/events/abcentral.jpg",
 
           description: [],
 
@@ -1285,7 +1285,7 @@ export const exploreData = {
           organizers: "Central",
           type: "Fashion Show/Ramp Walk",
           mode: "Offline",
-          bg_img: "/images/explore/events/1.jpg",
+          bg_img: "/images/explore/events/abcentral.jpg",
 
           description: [],
 
@@ -1313,7 +1313,7 @@ export const exploreData = {
           organizers: "Central",
           type: "Mr. & Mrs Abhivyakti",
           mode: "Offline",
-          bg_img: "/images/explore/events/1.jpg",
+          bg_img: "/images/explore/events/abcentral.jpg",
 
           description: [],
 
@@ -1346,7 +1346,7 @@ export const exploreData = {
           organizers: "Synergy",
           type: "BGMI",
           mode: "Offline",
-          bg_img: "/images/explore/events/1.jpg",
+          bg_img: "/images/explore/events/synergy.png",
 
           description: [
             "The gaming competitions under Abhivyakti are curated to complement the cultural spirit of the fest while maintaining competitive integrity. These events aim to attract enthusiastic gamers, encourage teamwork, and provide a high-energy experience for participants as well as spectators.",
@@ -1463,7 +1463,7 @@ export const exploreData = {
           organizers: "Synergy",
           type: "FREE FIRE",
           mode: "Offline",
-          bg_img: "/images/explore/events/1.jpg",
+          bg_img: "/images/explore/events/synergy.png",
 
           description: [
             "We invite passionate and disciplined gamers who are eager to compete, collaborate, and represent their skills on a prominent cultural platform. Participants are expected to uphold the values of fairness, respect, and sportsmanship throughout the event.",
@@ -1555,7 +1555,7 @@ export const exploreData = {
           organizers: "Synergy",
           type: "Valorant",
           mode: "Offline",
-          bg_img: "/images/explore/events/1.jpg",
+          bg_img: "/images/explore/events/synergy.png",
 
           description: [
             "The gaming competitions under Abhivyakti are curated to complement the cultural spirit of the fest while maintaining competitive integrity. These events aim to attract enthusiastic gamers, encourage teamwork, and provide a high-energy experience for participants as well as spectators.",
@@ -1648,7 +1648,7 @@ export const exploreData = {
           organizers: "Synergy",
           type: "Clash Royale",
           mode: "Offline",
-          bg_img: "/images/explore/events/1.jpg",
+          bg_img: "/images/explore/events/synergy.png",
 
           description: [
             "The gaming competitions under Abhivyakti are curated to complement the cultural spirit of the fest while maintaining competitive integrity. These events aim to attract enthusiastic gamers, encourage teamwork, and provide a high-energy experience for participants as well as spectators.",
@@ -1765,7 +1765,7 @@ export const exploreData = {
           organizers: "Synergy",
           type: "Call of Duty",
           mode: "Offline",
-          bg_img: "/images/explore/events/1.jpg",
+          bg_img: "/images/explore/events/synergy.png",
 
           description: [
             "The gaming competitions under Abhivyakti are curated to complement the cultural spirit of the fest while maintaining competitive integrity. These events aim to attract enthusiastic gamers, encourage teamwork, and provide a high-energy experience for participants as well as spectators.",
