@@ -1,3 +1,4 @@
+import ComingSoon from "../../common/ComingSoon/ComingSoon";
 import "../GuestsSpeakers/GuestsSpeakers.css";
 import SponsorCard from "./sponserCard";
 
@@ -31,7 +32,8 @@ const Sponsors = () => {
         style={{ fontFamily: "'Adqila', serif", fontWeight: 400 }}
       >SPONSORS</h1>
       <br /><br />
-      <div className="relative z-10 w-full flex flex-col gap-8 sm:gap-12">
+      <ComingSoon/>
+      {/* <div className="relative z-10 w-full flex flex-col gap-8 sm:gap-12">
         <div className="w-full overflow-hidden">
           <div className="flex gap-8 sm:gap-15 w-max animate-[marquee-right_30s_linear_infinite]">
             {[...topSponsors, ...topSponsors].map((s, i) => (
@@ -50,7 +52,7 @@ const Sponsors = () => {
             ))}
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

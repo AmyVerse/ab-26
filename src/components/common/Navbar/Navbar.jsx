@@ -20,7 +20,7 @@ const Navbar = () => {
     "/explore": "Explore | Abhivyakti 26",
     "/sponsors": "Sponsors | Abhivyakti 26",
     "/teams": "Teams | Abhivyakti 26",
-    "/contact": "Contact Us | Abhivyakti 26",
+    // "/contact": "Contact Us | Abhivyakti 26",
     "/developers": "Developers | Abhivyakti 26",
   };
 

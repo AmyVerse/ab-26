@@ -1223,43 +1223,46 @@ export const exploreData = {
     {
       id: "AB_events",
       events: [
-        {
-          id: "AB_events_1",
-          name: "Event Name",
-          organizers: "Central",
-          type: "Treasure Hunt",
-          mode: "Offline",
-          bg_img: "/images/explore/events/abcentral.jpg",
+        // {
+        //   id: "AB_events_1",
+        //   name: "DJ WARS",
+        //   organizers: "Central",
+        //   type: "Treasure Hunt",
+        //   mode: "Offline",
+        //   bg_img: "/images/explore/events/abcentral.jpg",
 
-          description: [],
+        //   description: [],
 
-          prizes: {
-            prize_pool: "₹25,000",
-            first: "₹15,000",
-            second: "₹10,000",
-          },
+        //   prizes: {
+        //     prize_pool: "₹25,000",
+        //     first: "₹15,000",
+        //     second: "₹10,000",
+        //   },
 
-          unstop_link: "#",
+        //   unstop_link: "#",
 
-          stages: [],
+        //   stages: [],
 
-          rules: [],
+        //   rules: [],
 
-          contact: {
-            name: "Rhythem Gupta",
-            email: "bt24ece064@iiitn.ac.in",
-            phone: "9729442465",
-          },
-        },
+        //   contact: {
+        //     name: "Rhythem Gupta",
+        //     email: "bt24ece064@iiitn.ac.in",
+        //     phone: "9729442465",
+        //   },
+        // },
         {
           id: "AB_events_2",
-          name: "Event Name",
+          name: "DJ WARS",
           organizers: "Central",
-          type: "DJ Wars",
+          type: "Crowd Control Edition",
           mode: "Offline",
           bg_img: "/images/explore/events/abcentral.jpg",
 
-          description: [],
+          description: [
+            "DJ Wars – Crowd Control Edition is a high-energy competitive DJ battle focused on live mixing, adaptability, and real-time crowd engagement. Unlike conventional DJ competitions, this format tests how well a DJ can read the crowd, maintain energy, and handle pressure on the spot.",
+            "Participants will compete head-to-head in knockout-style battles where audience response plays a major role in determining winners. Strategic planning, musical creativity, and dynamic stage presence will define the ultimate champion."
+          ],
 
           prizes: {
             prize_pool: "₹25,000",
@@ -1269,72 +1272,214 @@ export const exploreData = {
 
           unstop_link: "#",
 
-          stages: [],
+          stages: [
+            {
+              id: "round_1",
+              title: "Round 1: Knockout Battle",
+              start_date: "19th March 2026",
+              end_date: "19th March 2026",
 
-          rules: [],
+              description: [
+                "Head-to-head DJ battles with live audience voting.",
+                "Performance Time: 5 minutes",
+                "Sound Check: 2 minutes",
+                "Maximum five songs OR one remix containing up to ten songs.",
+                "Live mixing using Virtual DJ software is mandatory."
+              ],
+
+              submission_requirements: [
+                "Team size: 2–4 participants.",
+                "Participants must bring their own laptop and necessary cables/adapters.",
+                "Only songs purchased during the auction can be played.",
+                "One random genre/song will be assigned 5–10 minutes before performance and must be included in the set."
+              ]
+            },
+            {
+              id: "round_2",
+              title: "Finale",
+              start_date: "20th March 2026",
+              end_date: "20th March 2026",
+
+              description: [
+                "Final knockout battle between top qualifying teams.",
+                "Performance Time: 10 minutes.",
+                "Audience voting and organizing committee evaluation will determine winners."
+              ],
+
+              submission_requirements: [
+                "Maximum five songs OR remix up to ten songs.",
+                "Strict adherence to time limits (exceeding by 60+ seconds may lead to penalties).",
+                "Random genre/song challenge remains applicable.",
+                "Live mixing is mandatory; pre-recorded mixes are prohibited."
+              ]
+            }
+          ],
+
+          rules: [
+            "Team Size: 2–4 participants.",
+            "Open to Undergraduate and Postgraduate Engineering students only.",
+            "Valid Institute ID cards are mandatory.",
+            "Auction-Based Song Selection: Songs must be purchased using allocated points before the event. No repetition allowed across teams.",
+            "Random Song/Genre Challenge: Must be integrated into the set. Failure may result in penalties or disqualification.",
+            "Maximum five songs per round OR one remix containing up to ten songs.",
+            "Strict time limits must be followed.",
+            "Live mixing is mandatory. Pre-recorded mixes are strictly prohibited.",
+            "Only Virtual DJ software is allowed.",
+            "Performances are judged on crowd engagement, song flow, transitions, stage presence, and handling of the random challenge.",
+            "Audience voting will influence advancement.",
+            "Continuous booing, misconduct, inappropriate content, or rule violation may result in instant elimination.",
+            "Offensive, obscene, or culturally insensitive content is strictly prohibited.",
+            "Any damage to equipment will result in disqualification and penalty.",
+            "The Organizing Committee’s decision will be final and binding."
+          ],
 
           contact: {
             name: "Lakshay",
             email: "",
             phone: "7889296396",
-          },
+          }
         },
+        // {
+        //   id: "AB_events_3",
+        //   name: "Event Name",
+        //   organizers: "Central",
+        //   type: "Fashion Show/Ramp Walk",
+        //   mode: "Offline",
+        //   bg_img: "/images/explore/events/abcentral.jpg",
+
+        //   description: [],
+
+        //   prizes: {
+        //     prize_pool: "₹25,000",
+        //     first: "₹15,000",
+        //     second: "₹10,000",
+        //   },
+
+        //   unstop_link: "#",
+
+        //   stages: [],
+
+        //   rules: [],
+
+        //   contact: {
+        //     name: "Prabhu Doma",
+        //     email: "bt24cse209@iiitn.ac.in",
+        //     phone: "6281938865",
+        //   },
+        // },
         {
-          id: "AB_events_3",
-          name: "Event Name",
+          id: "AB_events_4",
+          name: "Mr. & Ms. Abhivyakti",
           organizers: "Central",
-          type: "Fashion Show/Ramp Walk",
+          type: "Personality Pageant",
           mode: "Offline",
           bg_img: "/images/explore/events/abcentral.jpg",
 
-          description: [],
+          description: [
+            "Mr. & Ms. Abhivyakti is the flagship personality pageant of the Abhivyakti cultural fest. It goes beyond a conventional beauty contest and seeks the ultimate polymath—where charisma meets intellect and quick wit.",
+            "The competition celebrates versatility—participants who can embody the grace of cultural traditions and the bold confidence of western styles. From commanding the ramp to handling high-pressure Q&A sessions, this event crowns a well-rounded icon of expression, style, and stage presence."
+          ],
 
           prizes: {
-            prize_pool: "₹25,000",
-            first: "₹15,000",
-            second: "₹10,000",
+            prize_pool: "Trophy + Certificate",
+            first: "Trophy + Certificate",
+            second: "Special Mentions",
           },
 
           unstop_link: "#",
 
-          stages: [],
+          stages: [
+            {
+              id: "round_1",
+              title: "Round 1: Online Pre-Screening",
+              start_date: "12th March 2026",
+              end_date: "14th March 2026",
 
-          rules: [],
+              description: [
+                "Participants must complete registration by submitting required materials.",
+                "Selection will be based on photographic appeal and quality of responses.",
+                "Only 12 Boys and 12 Girls will advance to on-stage rounds."
+              ],
+
+              submission_requirements: [
+                "2–3 photographs",
+                "Short bio (maximum 100 words)",
+                "Answer to: 'Why should you be Mr./Ms. Abhivyakti?'"
+              ]
+            },
+            {
+              id: "round_2",
+              title: "Round 2: Cultural Walk (Day 0)",
+              start_date: "19th March 2026",
+              end_date: "19th March 2026",
+
+              description: [
+                "Theme: Traditional/Cultural Wear.",
+                "Participants will perform a ramp walk, introduce themselves, and execute one expressive pose/action at the ramp head."
+              ],
+
+              submission_requirements: [
+                "No props allowed.",
+                "No singing or performing arts allowed.",
+                "Purely walk and introduction."
+              ]
+            },
+            {
+              id: "round_3",
+              title: "Round 3: Western Walk",
+              start_date: "20th March 2026",
+              end_date: "20th March 2026",
+
+              description: [
+                "Theme: Western/Formal Wear.",
+                "Format similar to Round 2 but with higher stakes.",
+                "Scores from Day 0 and Day 1 will be combined.",
+                "Top 6 Boys and Top 6 Girls advance to the Grand Finale."
+              ],
+
+              submission_requirements: [
+                "Ramp walk and self-introduction.",
+                "Strict adherence to reporting and stage instructions."
+              ]
+            },
+            {
+              id: "round_4",
+              title: "Grand Finale: Personality & Wit Q&A",
+              start_date: "20th March 2026",
+              end_date: "20th March 2026",
+
+              description: [
+                "Finalists face a Q&A round testing confidence, spontaneity, and thought process.",
+                "Each finalist will answer 2–3 questions.",
+                "Time limit per answer: 20–30 seconds."
+              ],
+
+              submission_requirements: [
+                "Finalists only (Top 6 Boys & Top 6 Girls).",
+                "Answers must be within 20–30 seconds."
+              ]
+            }
+          ],
+
+          rules: [
+            "Open to Undergraduate and Postgraduate students (all streams).",
+            "Individual participation only.",
+            "Valid Institute ID card is mandatory.",
+            "Participants must report backstage 30 minutes before scheduled walk time.",
+            "Obscenity, offensive language, or vulgar gestures will lead to disqualification.",
+            "Access to green room is restricted to participants only.",
+            "Use of fire, liquids, glass, glitter, or hazardous materials is strictly prohibited.",
+            "Judges’ and Organizing Committee’s decisions are final and binding.",
+            "Scores from Cultural & Western Walk rounds will determine finalists.",
+            "Final Q&A will be judged separately."
+          ],
 
           contact: {
             name: "Prabhu Doma",
-            email: "bt24cse209@iiitn.ac.in",
-            phone: "6281938865",
-          },
-        },
-        {
-          id: "AB_events_4",
-          name: "Event Name",
-          organizers: "Central",
-          type: "Mr. & Mrs Abhivyakti",
-          mode: "Offline",
-          bg_img: "/images/explore/events/abcentral.jpg",
-
-          description: [],
-
-          prizes: {
-            prize_pool: "₹25,000",
-            first: "₹15,000",
-            second: "₹10,000",
-          },
-
-          unstop_link: "#",
-
-          stages: [],
-
-          rules: [],
-
-          contact: {
-            name: "",
             email: "",
-            phone: "",
-          },
-        },
+            phone: "6281938865",
+          }
+        }
       ],
     },
     {

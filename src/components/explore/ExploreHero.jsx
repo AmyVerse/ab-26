@@ -125,7 +125,7 @@ export default function ExploreHero() {
 
           <div className="stat">
             <span className="stat-num">
-              <Counter to={10} delay={1.7} />+
+              <Counter to={5} delay={1.7} />+
             </span>
             <span className="stat-text">Lakh Prize Pool</span>
           </div>

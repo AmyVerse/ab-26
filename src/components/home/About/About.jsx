@@ -217,17 +217,8 @@ const About = () => {
                   }}
                   className="w-full text-white md:text-xl text-justify"
                 >
-                  Abhivyakti, the annual cultural extravaganza of IIIT Nagpur,
-                  is a grand celebration of creativity, artistry, and cultural
-                  diversity. True to its name, meaning "expression," it offers
-                  students a vibrant platform to showcase their talents, push
-                  boundaries, and foster a spirit of camaraderie and
-                  collaboration. As one of the most awaited campus events, it
-                  transforms the institute into a lively hub of energy and
-                  artistic brilliance. The fest features electrifying concerts,
-                  mesmerizing dances, captivating plays, and stunning art
-                  exhibitions, inspiring participants to explore their potential
-                  and celebrate creativity in unique, memorable ways.
+                  Abhivyakti, the annual cultural fest of IIIT Nagpur, is a grand celebration of expression and artistry. It serves as a dynamic platform for students to showcase their talents and foster collaboration, transforming the campus into a vibrant hub of creative brilliance.
+                  The festival features an immersive blend of music, dance, and theatre alongside signature pro-shows and stunning art exhibitions. Every segment is designed to inspire and entertain, inviting the community to explore their potential within a high-energy carnival atmosphere.
                 </motion.div>
                 <div className="mt-6 w-full md:w-fit grid place-items-center">
                   <button

@@ -18,9 +18,10 @@
   width: 85%;
   max-width: 1200px; /* Reduced width */
   height: 70vh; /* Reduced height */
+  min-height: 700px; /* Ensure it doesn't shrink too much */
   background: #0e0e0e;
   border-radius: 20px;
-  padding: 3rem;
+  padding: 2rem;
   position: relative;
   display: flex;
   gap: 3rem;
@@ -191,12 +192,13 @@
 .tabContent {
   flex: 1;
   margin-bottom: 2rem;
-  padding: 2rem;
+  padding: 1.5rem;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.02);
   overflow-y: auto; /* Enable scrolling */
   max-height: 50vh; /* Limit height to trigger scroll if needed */
+  min-height: 350px;
 }
 
 /* ... (keep other tabContent styles/scrollbars) ... */
@@ -624,9 +626,9 @@
     margin-bottom: 1rem;
   }
 
-  .tabContent {
+  /* .tabContent {
     overflow: visible;
-  }
+  } */
 
   .actions {
     margin-top: 1.5rem;

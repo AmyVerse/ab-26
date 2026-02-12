@@ -40,7 +40,7 @@ const TeamGroup = ({ title, members }) => {
             key={`mobile-${index}`}
             name={member.name}
             designation={member.designation}
-            column="center"
+            // column="center"
           />
         ))}
       </div>

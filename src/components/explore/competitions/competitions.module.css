@@ -81,7 +81,7 @@
   background: transparent; /* Remove background box if implied by "just show cards" or keep it subtle? User said "update right panel like align it... just show the cards". I'll keep the glassmorphism but align it. */
   /* actually "matches the level from where ticket starts" implies visual alignment. */
   /* removing background might look cleaner if cards have their own bg */
-  background: rgba(255, 255, 255, 0.02);
+  /* background: rgba(255, 255, 255, 0.02); */
   border-radius: 16px;
   padding: 0; /* Remove padding so cards can go to edges if needed, or keep for container */
   padding-top: 4rem; /* Match ticketList padding-top */
