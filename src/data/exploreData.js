@@ -960,24 +960,58 @@ export const exploreData = {
               end_date: "21th March 2025",
 
               description:
-                "Teams will showcase their self-made video advertisement in front of the judges and audience. Shooting facilities will be available on the IIIT Nagpur campus for those who wish to create their ad on-site.",
+                "Delegates must articulate their assigned nation's policy through formal debate. This phase will serve as the primary forum for negotiation, where competing blocs will draft resolutions to move forward to the final voting procedure.",
 
-              submission_requirements: [
-                "File Format: mp4 only.",
-                "Submission Device: Ads must be presented on a personal device (laptop, tablet, or USB drive).",
-              ],
+              submission_requirements: {
+                title: "Rules",
+                rules: [
+                  "Delegates represent assigned countries, NGOs, or organizations.",
+                  "The Chair/Moderator guides committee proceedings and maintains order.",
+                  "Roll Call is conducted at the beginning of each session; delegates respond with 'present' or 'present and voting'.",
+                  "Delegates may raise motions to set the agenda; the committee votes to decide topic order.",
+                  "A Speakers' List is maintained where delegates deliver formal speeches.",
+                  "Moderated caucuses allow short, timed speeches for focused discussion.",
+                  "Unmoderated caucuses allow informal discussion and collaboration between delegates.",
+
+                  "Motions are used to propose actions (e.g., motion to open the Speakers' List).",
+                  "Points allow delegates to raise questions or procedural concerns.",
+                  "Point of Order is used to correct procedural mistakes.",
+                  "Point of Inquiry is used to ask questions about procedure.",
+                  "Point of Personal Privilege is used to address personal discomfort (e.g., inaudibility).",
+
+                  "Working papers outline preliminary solutions.",
+                  "Draft resolutions are formal solutions requiring sponsors and signatories.",
+                  "Friendly amendments are accepted by all sponsors and adopted without voting.",
+                  "Unfriendly amendments require debate and voting.",
+
+                  "Substantive voting is used for resolutions and amendments; only 'present and voting' delegates may vote.",
+                  "Procedural voting applies to motions and procedural matters; all delegates vote.",
+                  "Most decisions require a simple majority.",
+                  "Specific motions (such as closing debate) require a two-thirds majority.",
+
+                  "Delegates must maintain formal decorum and respect the Chair and other delegates.",
+                  "Delegates must use formal language and avoid personal pronouns.",
+                  "Delegates should refer to themselves as 'the delegate of [Country]'."
+                ]
+              },
             },
           ],
 
           rules: [
-            "Props: Teams are responsible for arranging their own props for video production.",
-            "Shooting Facilities: Available at IIIT Nagpur campus.",
-            "Content Restrictions: Explicit content or offensive material is strictly prohibited.",
-            "Video Resolution: Must not exceed 1920x1080 pixels (1080p).",
-            "Time Limit: Exceeding the time limit will result in negative points.",
-            "Judgment: Judges’ decision is final and binding.",
-            "Team Size: Minimum 2, Maximum 4 participants. Intercollege teams are allowed.",
+            "Plays can be in Hindi, English, or bilingual, although short snippets of other languages are allowed.",
+            "The play in the final round should be on the same plot as submitted in Round 1, with minor permissible alterations.",
+            "The use of hazardous items (e.g., fluids, flames, sharp objects) or anything that may damage the stage is strictly prohibited.",
+            "Time limits for both rounds must be adhered to strictly.",
+            "Plagiarism is prohibited. Originality is expected in all performances.",
+            "Solo acts only—each participant performs individually.",
+            "Dialogues must be delivered live; pre-recorded audio is not allowed.",
+            "Video submissions must be clear in both visuals and audio.",
+            "Inappropriate content, obscenity, or vulgarity will lead to disqualification.",
+            "Judges’ decisions will be final.",
+            "In case of any disputes, the decision made by the Organizing Committee (OC) will be final. The OC also holds the right to disqualify any team in case of discrepancies.",
+            "Undergraduate, Postgraduate, and School students are eligible for the competition."
           ],
+
 
           contact: {
             name: "Rutva Gandhi",
@@ -1292,7 +1326,7 @@ export const exploreData = {
 
         //   prizes: {
         //     prize_pool: "₹10,000",
-            // first: "₹15,000",
+        // first: "₹15,000",
         //     second: "₹10,000",
         //   },
 
