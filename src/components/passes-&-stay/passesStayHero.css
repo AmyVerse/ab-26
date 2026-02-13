@@ -36,7 +36,7 @@
 }
 
 .title {
-  font-family: "BudmoJigglish", serif;
+  font-family: var(--font-budmo-jigglish);
   font-weight: 300;
   font-size: clamp(4rem, 9vw, 8rem);
   line-height: 1;

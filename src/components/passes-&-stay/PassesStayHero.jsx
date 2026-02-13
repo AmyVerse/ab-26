@@ -7,11 +7,12 @@ const stageBg = "https://assets.2026.abhivyaktifest.in/src/assets/background/bac
 const PassesStayHero = () => {
   return (
     <section className="hero">
-
       {/* Background */}
       <div
         className="hero-bg"
-        style={{ backgroundImage: `url(${stageBg})` }}
+        style={{
+          backgroundImage: `url(${stageBg})`,
+        }}
       />
 
       {/* ABHIVYAKTI branding */}
@@ -57,9 +58,10 @@ const PassesStayHero = () => {
               const progress = Math.min(timeElapsed / duration, 1);
 
               // Easing function (easeInOutQuad)
-              const ease = progress < 0.5
-                ? 2 * progress * progress
-                : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+              const ease =
+                progress < 0.5
+                  ? 2 * progress * progress
+                  : 1 - Math.pow(-2 * progress + 2, 2) / 2;
 
               window.scrollTo(0, startPosition + distance * ease);
 
@@ -71,8 +73,20 @@ const PassesStayHero = () => {
             requestAnimationFrame(animation);
           }}
         >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M6 9L12 15L18 9" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M6 9L12 15L18 9"
+              stroke="white"
+              strokeWidth="3"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
         </button>
       </div>
@@ -87,7 +101,6 @@ const PassesStayHero = () => {
 
       {/* Fade to content */}
       <div className="hero-to-content-gradient" />
-
     </section>
   );
 };

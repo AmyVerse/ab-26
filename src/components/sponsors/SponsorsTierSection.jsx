@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
-import styles from "./sponsors.module.css";
 import SponsorCard from "./SponsorCard";
+import styles from "./sponsors.module.css";
 import { sectionVariants } from "./sponsors.motion";
 
-const SponsorsTierSection = ({ title = "TITLE SPONSER", sponsors = [] }) => {
+const SponsorsTierSection = ({ title = "TITLE Sponsor", sponsors = [] }) => {
   return (
     <section className={styles.section}>
       <motion.div
@@ -24,7 +24,7 @@ const SponsorsTierSection = ({ title = "TITLE SPONSER", sponsors = [] }) => {
             style={{
               gridTemplateColumns: `repeat(${Math.min(
                 sponsors.length,
-                4
+                4,
               )}, 1fr)`,
             }}
           >

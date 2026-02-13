@@ -1,17 +1,26 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import useAuth from "../../../hooks/auth/useAuth";
-import { useAuthContext } from "../../../contexts/AuthContext";
+import { useAuth } from "../../../contexts/AuthProvider";
+import { signOut } from "../../../lib/auth-client";
+import { useAuthModal } from "../../auth/ModalAuthLayout";
 import UserProfile from "./UserProfile";
 
 const Navbar = () => {
-  const { openAuth } = useAuth();
-  const { user, isLoggedIn, logout } = useAuthContext();
+  const { openAuth } = useAuthModal();
+  const { user, isAuthenticated, isLoading } = useAuth();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await signOut();
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
+  };
 
   // for page title
   const titles = {
@@ -38,19 +47,18 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // show on other routes
   const showSVG = location.pathname !== "/" || isScrolled;
 
   const navLinks = [
     { path: "/", label: "Home" },
     { path: "/about", label: "About" },
     { path: "/explore", label: "Explore" },
+    { path: "/passes-stay", label: "Passes & Stay" },
     { path: "/sponsors", label: "Sponsors" },
     { path: "/teams", label: "Team" },
     { path: "/contact", label: "Contact Us" },
   ];
 
-  // highlight the active path
   const isActive = (path) => location.pathname === path;
 
   const toggleMobileMenu = () => {
@@ -61,12 +69,15 @@ const Navbar = () => {
     setIsMobileMenuOpen(false);
   };
 
+  if (isLoading) {
+    return <div className="bg-red-200 w-5xl"></div>;
+  }
+
   return (
     <>
       <nav className="fixed top-0 left-0 right-0 z-[100] bg-linear-to-b from-black to-black/10 backdrop-blur-sm tracking-wider">
         <div className="mx-auto px-6 sm:px-8 lg:px-10">
           <div className="hidden md:flex justify-between items-center h-20 w-full">
-            {/* Logo + SVG */}
             <div
               onClick={() => navigate("/")}
               className="flex-1 flex items-center justify-start gap-2 lg:gap-3 cursor-pointer"
@@ -75,7 +86,6 @@ const Navbar = () => {
                 <img src="/mainlogo.png" />
               </div>
 
-              {/* damn, you can copy svg codes from figma this accurate :) */}
               <AnimatePresence>
                 {showSVG && (
                   <motion.svg
@@ -219,7 +229,34 @@ const Navbar = () => {
 
             {/* Auth Buttons / Profile */}
             <div className="flex-1 flex items-center justify-end space-x-3 lg:space-x-4 text-sm lg:text-base xl:text-lg">
-              {!isLoggedIn && (
+              {isLoading ? (
+                // Loading Component
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-gray-600 animate-pulse"></div>
+                  <div className="h-4 w-16 bg-gray-600 rounded animate-pulse"></div>
+                </div>
+              ) : isAuthenticated ? (
+                // Authenticated User UI
+                <div className="flex items-center gap-3">
+                  <div
+                    className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-linear-to-br from-yellow-400 to-yellow-600 flex items-center justify-center text-white font-semibold cursor-pointer hover:opacity-90 transition-opacity"
+                    title={user?.name || user?.firstName || "Profile"}
+                  >
+                    {(
+                      user?.name?.charAt(0) ||
+                      user?.firstName?.charAt(0) ||
+                      "U"
+                    ).toUpperCase()}
+                  </div>
+                  <button
+                    onClick={handleLogout}
+                    className="text-white hover:text-gray-300 transition-colors font-medium cursor-pointer text-sm lg:text-base"
+                  >
+                    Logout
+                  </button>
+                </div>
+              ) : (
+                // Unauthenticated User UI
                 <>
                   <button
                     onClick={() => openAuth("signup")}
@@ -277,27 +314,27 @@ const Navbar = () => {
               </div>
             </div>
 
-            <div className="flex items-center gap-3">
-              {!isLoggedIn && (
-                <button
-                  onClick={() => openAuth("signin")}
-                  className="px-3 py-1.5 bg-linear-to-b from-[#4f3b40] to-[#7D1128] cursor-pointer text-white font-medium rounded-lg hover:opacity-90 transition-opacity text-sm"
-                >
-                  Login
-                </button>
-              )}
-              <UserProfile
-                user={
-                  user || {
-                    first_name: "Satvik",
-                    last_name: "Rastogi",
-                    email: "satvik@example.com",
-                    ab_id: "AB_2026",
-                  }
-                }
-                logout={logout}
-              />
-            </div>
+            {isLoading ? (
+              <div className="w-8 h-8 rounded-full bg-gray-600 animate-pulse"></div>
+            ) : isAuthenticated ? (
+              <div
+                className="w-8 h-8 rounded-full bg-linear-to-br from-yellow-400 to-yellow-600 flex items-center justify-center text-white font-semibold cursor-pointer"
+                title={user?.name || user?.firstName || "Profile"}
+              >
+                {(
+                  user?.name?.charAt(0) ||
+                  user?.firstName?.charAt(0) ||
+                  "U"
+                ).toUpperCase()}
+              </div>
+            ) : (
+              <button
+                onClick={() => openAuth("signin")}
+                className="px-4 py-2 bg-linear-to-b from-[#4f3b40] to-[#7D1128] cursor-pointer text-white font-medium rounded-lg hover:opacity-90 transition-opacity text-base"
+              >
+                Login
+              </button>
+            )}
           </div>
         </div>
       </nav>
@@ -370,21 +407,26 @@ const Navbar = () => {
               ))}
 
               {/* Auth Buttons / Profile */}
-              {isLoggedIn ? (
+              {isLoading ? (
+                <div className="flex flex-col items-center gap-4 mt-8">
+                  <div className="w-12 h-12 rounded-full bg-gray-600 animate-pulse"></div>
+                  <div className="h-6 w-24 bg-gray-600 rounded animate-pulse"></div>
+                </div>
+              ) : isAuthenticated ? (
                 <div className="flex flex-col items-center gap-4 mt-8">
                   <div className="w-12 h-12 rounded-full bg-linear-to-br from-yellow-400 to-yellow-600 flex items-center justify-center text-white text-xl font-semibold">
-                    {user?.first_name?.charAt(0)?.toUpperCase() || "U"}
+                    {(
+                      user?.name?.charAt(0) ||
+                      user?.firstName?.charAt(0) ||
+                      "U"
+                    ).toUpperCase()}
                   </div>
                   <p className="text-white text-xl font-medium">
-                    {user?.first_name || "Profile"} {user?.last_name}
-                  </p>
-                  <p className="text-gray-400 text-sm">{user?.email}</p>
-                  <p className="text-yellow-500 text-xs border border-yellow-500/30 px-2 py-0.5 rounded-full bg-yellow-500/10">
-                    ID: {user?.ab_id || "AB_123456"}
+                    {user?.name || user?.firstName || "Profile"}
                   </p>
                   <button
                     onClick={() => {
-                      logout();
+                      handleLogout();
                       closeMobileMenu();
                     }}
                     className="text-red-400 hover:text-red-300 transition-colors font-medium text-lg"

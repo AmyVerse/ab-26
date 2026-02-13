@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useToast } from "../../contexts/ToastContext";
 
-const ForgotPassword = ({ onSwitchToSignIn, currentStep = 1 }) => {
+const ForgotPassword = ({ onSwitchToSignIn, onClose }) => {
   const { showToast } = useToast();
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -28,7 +28,7 @@ const ForgotPassword = ({ onSwitchToSignIn, currentStep = 1 }) => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row md:min-h-[650px] tracking-wide">
+    <div className="flex flex-col md:flex-row md:min-h-162.5 tracking-wide">
       {/* Left side - Brand/Image */}
       <div className="hidden md:flex md:w-1/2 items-start justify-start p-6 text-white text-center relative bg-gray-900 rounded-l-lg">
         <span className="text-xl font-semibold z-10 relative select-none">

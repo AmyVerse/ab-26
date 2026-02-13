@@ -1,19 +1,39 @@
-# React + Vite
+# Abhivyakti'26 Official Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Abhivyakti'26** is the annual technical and cultural festival that brings together innovation, creativity, and talent. This repository contains the official website for the festival, designed to provide participants and attendees with comprehensive information about events, registrations, passes, and more.
 
-Currently, two official plugins are available:
+## About the Festival
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Abhivyakti'26 is a celebration of technical excellence and cultural diversity, featuring competitions, workshops, guest speakers, and entertainment. The festival aims to foster learning, collaboration, and showcase emerging talent across various domains.
 
-## React Compiler
+## Website Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Event Registration**: Browse and register for competitions and events
+- **Digital Passes**: Purchase festival passes and accommodation packages
+- **Speaker Profiles**: Learn about distinguished guest speakers and industry experts
+- **Team Information**: Meet the organizing committee and contributors
+- **Sponsor Showcase**: View our partner organizations and sponsors
+- **Real-time Updates**: Get latest announcements and schedule changes
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Frontend**: React 18 with Vite
+- **Styling**: Tailwind CSS with custom animations
+- **Authentication**: Better Auth with JWT tokens
+- **Payments**: Razorpay integration
+- **Backend**: Express.js with custom OTP verification
+- **Deployment**: Optimized for production environments
 
+## Contributors
 
-NOTE : To add payment button use PayButton component from src/components/Razorpay/PayButton 
+This website was crafted by the dedicated development team of Abhivyakti'26:
+
+- Frontend development and UI/UX design
+- Backend API development and database management
+- Payment gateway integration and security
+- Mobile responsiveness and performance optimization
+- Content management and user experience testing
+
+---
+
+**Made with ❤️ by the Abhivyakti'26 Development Team**

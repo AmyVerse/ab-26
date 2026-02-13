@@ -1,6 +1,6 @@
 import ComingSoon from "../../common/ComingSoon/ComingSoon";
 import "../GuestsSpeakers/GuestsSpeakers.css";
-import SponsorCard from "./sponserCard";
+import SponsorCard from "./sponsorCard";
 
 const Sponsors = () => {
   const topSponsors = [

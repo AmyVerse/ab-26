@@ -1,5 +1,10 @@
 @import "tailwindcss";
-
+:root {
+  --font-gabarito: "Gabarito", sans-serif;
+  --font-besta-baru: "Besta Baru", system-ui, sans-serif;
+  --font-budmo-jigglish: "BudmoJigglish", serif;
+  --font-aquila: "Aquila", serif;
+}
 
 @font-face {
   font-family: "Besta Baru";
@@ -16,9 +21,10 @@
 }
 
 @font-face {
-  font-family: "Adqila";
+  font-family: "Aquila";
   src: url("https://assets.2026.abhivyaktifest.in/fonts/aqila-demoversion-regular.otf") format("opentype");
   font-weight: 400;
+  font-display: swap;
 }
 
 /* CSS for edge cases of Lenis (Smooth Scrolling) */
@@ -50,7 +56,7 @@ html.lenis body {
 html,
 body,
 #root {
-  font-family: var(--font-gabarito);
+  font-family: var(--font-gabarito, "Gabarito", sans-serif);
   scrollbar-width: thin; /* Firefox */
   scrollbar-color: #d4af37 #1a1a1a; /* Firefox: thumb track */
   width: 100%;

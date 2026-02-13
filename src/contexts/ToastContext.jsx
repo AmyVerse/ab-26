@@ -72,7 +72,7 @@ const Toast = ({ toast, onRemove }) => {
         px-6 py-3 rounded-lg shadow-lg border-[0.4px]
         transform transition-all duration-300 ease-out
         animate-in slide-in-from-top-2 fade-in
-        min-w-[300px] max-w-md
+        min-w-75 max-w-md
         flex items-center justify-between
       `}
     >

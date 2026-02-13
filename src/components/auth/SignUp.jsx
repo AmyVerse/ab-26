@@ -1,13 +1,21 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useToast } from "../../contexts/ToastContext";
-import { useAuthContext } from "../../contexts/AuthContext";
-import useAuth from "../../hooks/auth/useAuth";
+import { signIn, signUp, useSession } from "../../lib/auth-client";
+import { sendOTP, verifyOTP } from "../../lib/otp-client";
 
-const SignUp = ({ onSwitchToSignIn, onSwitchToVerifyOTP, currentStep = 1 }) => {
-  const { nextStep, prevStep } = useAuth();
+const OTP_LENGTH = 6;
+
+const SignUp = ({ onSwitchToSignIn, onClose }) => {
   const { showToast } = useToast();
-  const { register, googleLogin, isLoading: authLoading } = useAuthContext();
+  const { data: session, isLoading: sessionLoading } = useSession();
+  const [currentStep, setCurrentStep] = useState(1);
+  const inputRefs = useRef([]);
+  const [otp, setOtp] = useState(Array(OTP_LENGTH).fill(""));
+  const [isResending, setIsResending] = useState(false);
+  const [userEmail, setUserEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
   const [formData, setFormData] = useState({
     firstName: "",
     middleName: "",
@@ -19,13 +27,66 @@ const SignUp = ({ onSwitchToSignIn, onSwitchToVerifyOTP, currentStep = 1 }) => {
     password: "",
     confirmPassword: "",
   });
-  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const savedData = localStorage.getItem("signupFormData");
+    const savedEmail = localStorage.getItem("signupUserEmail");
+
+    if (savedData) {
+      try {
+        const parsedData = JSON.parse(savedData);
+        setFormData(parsedData);
+      } catch (error) {
+        console.error("Error loading saved form data:", error);
+      }
+    }
+
+    if (savedEmail) {
+      setUserEmail(savedEmail);
+    }
+  }, []);
+
+  const saveFormData = () => {
+    try {
+      localStorage.setItem("signupFormData", JSON.stringify(formData));
+      localStorage.setItem("signupUserEmail", userEmail);
+    } catch (error) {
+      console.error("Error saving form data:", error);
+    }
+  };
+
+  const clearSavedData = () => {
+    localStorage.removeItem("signupFormData");
+    localStorage.removeItem("signupUserEmail");
+  };
+
+  const nextStep = () => {
+    setCurrentStep((prev) => prev + 1);
+  };
+
+  const prevStep = () => {
+    setCurrentStep((prev) => Math.max(1, prev - 1));
+  };
+
+  // auto-focus otp
+  useEffect(() => {
+    if (currentStep === 3) {
+      inputRefs.current[0]?.focus();
+    }
+  }, [currentStep]);
 
   const handleChange = (e) => {
-    setFormData({
+    const updatedFormData = {
       ...formData,
       [e.target.name]: e.target.value,
-    });
+    };
+    setFormData(updatedFormData);
+
+    try {
+      localStorage.setItem("signupFormData", JSON.stringify(updatedFormData));
+    } catch (error) {
+      console.error("Error auto-saving form data:", error);
+    }
   };
 
   const validateStep = () => {
@@ -51,6 +112,13 @@ const SignUp = ({ onSwitchToSignIn, onSwitchToVerifyOTP, currentStep = 1 }) => {
         }
         return true;
       case 3:
+        const code = otp.join("");
+        if (code.length !== OTP_LENGTH) {
+          showToast("Please enter the full OTP", "error");
+          return false;
+        }
+        return true;
+      case 4:
         if (!formData.password.trim()) {
           showToast("Password is required", "error");
           return false;
@@ -69,6 +137,114 @@ const SignUp = ({ onSwitchToSignIn, onSwitchToVerifyOTP, currentStep = 1 }) => {
     }
   };
 
+  const verifyOTPCode = async (otpArray = null) => {
+    if (isLoading) return;
+
+    const codeArray = otpArray || otp;
+    const code = codeArray.join("");
+    if (code.length !== OTP_LENGTH) {
+      showToast("Please enter the full OTP", "error");
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      await verifyOTP(userEmail, code);
+      showToast("Email verified successfully!", "success");
+      saveFormData();
+      nextStep();
+    } catch (err) {
+      console.error("OTP verification error:", err);
+      const errorMessage = err.message || "Invalid OTP. Please try again.";
+      showToast(errorMessage, "error");
+      setOtp(Array(OTP_LENGTH).fill(""));
+      inputRefs.current[0]?.focus();
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleOtpChange = (value, index) => {
+    if (value && !/^\d$/.test(value)) return;
+
+    const newOtp = [...otp];
+    newOtp[index] = value;
+    setOtp(newOtp);
+
+    if (value && index < OTP_LENGTH - 1) {
+      inputRefs.current[index + 1]?.focus();
+    }
+
+    // auto-verify on 6th digit
+    if (value && newOtp.every((digit) => digit !== "")) {
+      setTimeout(() => {
+        verifyOTPCode(newOtp);
+      }, 100);
+    }
+  };
+
+  const handleKeyDown = (e, index) => {
+    if (e.key === "Backspace") {
+      if (!otp[index] && index > 0) {
+        inputRefs.current[index - 1]?.focus();
+        const newOtp = [...otp];
+        newOtp[index - 1] = "";
+        setOtp(newOtp);
+      } else {
+        const newOtp = [...otp];
+        newOtp[index] = "";
+        setOtp(newOtp);
+      }
+    }
+    if (e.key === "ArrowLeft" && index > 0) {
+      inputRefs.current[index - 1]?.focus();
+    }
+    if (e.key === "ArrowRight" && index < OTP_LENGTH - 1) {
+      inputRefs.current[index + 1]?.focus();
+    }
+  };
+
+  const handlePaste = (e) => {
+    e.preventDefault();
+    const pasted = e.clipboardData
+      .getData("text")
+      .replace(/\D/g, "")
+      .slice(0, OTP_LENGTH);
+
+    if (!pasted) return;
+
+    const newOtp = [...otp];
+    for (let i = 0; i < pasted.length; i++) {
+      newOtp[i] = pasted[i];
+    }
+    setOtp(newOtp);
+
+    const nextEmpty = newOtp.findIndex((v) => !v);
+    inputRefs.current[nextEmpty === -1 ? OTP_LENGTH - 1 : nextEmpty]?.focus();
+  };
+
+  const handleResendOTP = async () => {
+    if (!userEmail) {
+      showToast("Email address not available for resend", "error");
+      return;
+    }
+
+    setIsResending(true);
+    try {
+      await sendOTP(userEmail);
+      showToast("Verification code sent to your email", "success");
+      setOtp(Array(OTP_LENGTH).fill(""));
+      inputRefs.current[0]?.focus();
+    } catch (err) {
+      console.error("Resend OTP error:", err);
+      const errorMessage =
+        err.message || "Failed to resend OTP. Please try again.";
+      showToast(errorMessage, "error");
+    } finally {
+      setIsResending(false);
+    }
+  };
+
   const handleContinue = async (e) => {
     e.preventDefault();
 
@@ -76,32 +252,80 @@ const SignUp = ({ onSwitchToSignIn, onSwitchToVerifyOTP, currentStep = 1 }) => {
       return;
     }
 
-    if (currentStep < 3) {
+    if (currentStep < 2) {
+      saveFormData();
       nextStep();
-    } else {
-      // Final submission
+    } else if (currentStep === 2) {
+      setUserEmail(formData.email);
+      saveFormData();
+
       setIsLoading(true);
       try {
-        await register({
-          first_name: formData.firstName,
-          last_name: formData.lastName,
-          email: formData.email,
-          password: formData.password,
-        });
-        showToast("Account created! Please verify your email.", "success");
-        // Navigate to OTP verification
-        if (onSwitchToVerifyOTP) onSwitchToVerifyOTP();
+        await sendOTP(formData.email);
+        showToast("Verification code sent to your email", "success");
+        nextStep();
       } catch (err) {
-        showToast(err.message || "Failed to create account. Please try again.", "error");
+        console.error("Send verification error:", err);
+        const errorMessage = err.message || "Failed to send verification email";
+        showToast(errorMessage, "error");
       } finally {
         setIsLoading(false);
       }
+    } else if (currentStep === 3) {
+      await verifyOTPCode();
+    } else if (currentStep === 4) {
+      setIsLoading(true);
+      saveFormData();
+
+      await signUp.email(
+        {
+          email: formData.email,
+          password: formData.password,
+          name: `${formData.firstName} ${formData.lastName}`,
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          emailVerified: true,
+          collegeName: formData.collegeName,
+          phoneNumber: formData.phoneNumber,
+          authProvider: "local",
+        },
+        {
+          onRequest: () => {
+            setIsLoading(true);
+          },
+          onSuccess: (ctx) => {
+            setIsLoading(false);
+            clearSavedData();
+            showToast("Account created successfully!", "success");
+            onClose();
+          },
+          onError: (ctx) => {
+            setIsLoading(false);
+            clearSavedData();
+            showToast(ctx.error.message || "Registration failed", "error");
+          },
+        },
+      );
     }
   };
 
-  const handleGoogleSignUp = (e) => {
+  const handleGoogleSignUp = async (e) => {
     e.preventDefault();
-    googleLogin();
+    try {
+      showToast("Redirecting to Google...", "info");
+
+      const currentOrigin =
+        window.location.origin || import.meta.env.VITE_FRONTEND_URL;
+
+      await signIn.social({
+        provider: "google",
+        callbackURL: `${currentOrigin}/`,
+        redirectTo: currentOrigin,
+      });
+    } catch (error) {
+      console.error("Google signup error:", error);
+      showToast("Google signup failed. Please try again.", "error");
+    }
   };
 
   const renderStepContent = () => {
@@ -199,6 +423,58 @@ const SignUp = ({ onSwitchToSignIn, onSwitchToVerifyOTP, currentStep = 1 }) => {
           </>
         );
       case 3:
+        // OTP Verification Step
+        const isOtpComplete = otp.every((d) => d !== "");
+
+        return (
+          <>
+            <div className="mb-6 text-center">
+              <p className="text-gray-600 text-base mb-4">
+                We've sent a 6‑digit code to{" "}
+                <span className="font-semibold text-gray-800">{userEmail}</span>
+                . Enter it below.
+              </p>
+            </div>
+
+            <div className="flex justify-center gap-3 mb-6">
+              {otp.map((digit, idx) => (
+                <input
+                  key={idx}
+                  ref={(el) => (inputRefs.current[idx] = el)}
+                  type="text"
+                  inputMode="numeric"
+                  maxLength={1}
+                  value={digit}
+                  onChange={(e) => handleOtpChange(e.target.value, idx)}
+                  onKeyDown={(e) => handleKeyDown(e, idx)}
+                  onPaste={idx === 0 ? handlePaste : undefined}
+                  className={`w-12 h-14 text-center text-xl font-semibold border-2 rounded-md transition-all duration-200 focus:outline-none ${
+                    digit
+                      ? "border-green-500 bg-green-50 text-green-800"
+                      : "border-gray-600 focus:border-[#3C0919] focus:ring-2 focus:ring-[#3c091951]"
+                  }`}
+                  autoComplete="one-time-code"
+                />
+              ))}
+            </div>
+
+            <div className="text-center text-sm text-gray-500">
+              <p>
+                Didn't receive the code?{" "}
+                <button
+                  type="button"
+                  onClick={handleResendOTP}
+                  disabled={isResending}
+                  className="text-red-600 font-bold hover:text-red-800 hover:underline transition-colors bg-transparent border-none cursor-pointer disabled:opacity-50"
+                >
+                  {isResending ? "Resending..." : "Resend OTP"}
+                </button>
+              </p>
+            </div>
+          </>
+        );
+      case 4:
+        // Password Creation Step
         return (
           <>
             <input
@@ -227,7 +503,7 @@ const SignUp = ({ onSwitchToSignIn, onSwitchToVerifyOTP, currentStep = 1 }) => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row md:min-h-[650px] tracking-wide">
+    <div className="flex flex-col md:flex-row md:min-h-162.5 tracking-wide">
       {/* Left side - Brand/Image */}
       <div className="hidden md:flex md:w-1/2 items-start justify-start p-6 text-white text-center relative bg-gray-900 rounded-l-lg">
         <span className="text-xl font-semibold z-10 relative select-none">
@@ -285,7 +561,7 @@ const SignUp = ({ onSwitchToSignIn, onSwitchToVerifyOTP, currentStep = 1 }) => {
             <div className="w-full h-1.25 bg-gray-200 rounded-lg my-6">
               <div
                 className="h-full bg-linear-to-r from-pink-500 to-red-600 transition-all duration-300 rounded-lg"
-                style={{ width: `${(currentStep / 3) * 100}%` }}
+                style={{ width: `${(currentStep / 4) * 100}%` }}
               />
             </div>
 
@@ -309,35 +585,41 @@ const SignUp = ({ onSwitchToSignIn, onSwitchToVerifyOTP, currentStep = 1 }) => {
               <button
                 type="submit"
                 className="bg-[#3C0919] border-2 text-white border-none p-2 sm:p-3 text-lg sm:text-xl font-medium cursor-pointer transition-all duration-200 mt-2 disabled:opacity-70 disabled:cursor-not-allowed hover:bg-[#5a0d29] hover:transform hover:shadow-lg"
-                disabled={isLoading}
+                disabled={isLoading || sessionLoading}
               >
                 {isLoading
                   ? "Processing..."
-                  : currentStep === 3
-                    ? "Create Account"
-                    : "Continue"}
+                  : currentStep === 2
+                    ? "Send Verification"
+                    : currentStep === 3
+                      ? "Verify Email"
+                      : currentStep === 4
+                        ? "Create Account"
+                        : "Continue"}
               </button>
 
               <button
                 onClick={handleGoogleSignUp}
                 type="button"
                 className="p-2 sm:p-3 border-2 -mt-2 md:-mt-3 border-gray-600 text-lg sm:text-xl font-medium cursor-pointer transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed hover:bg-[#3c09191e]"
-                disabled={isLoading}
+                disabled={isLoading || currentStep > 2}
               >
                 Continue with Google
               </button>
             </form>
 
             <div className="mt-4 pt-6 border-gray-200">
-              <p className="text-gray-500 text-sm sm:text-md">
-                Already have an account?{" "}
-                <button
-                  onClick={onSwitchToSignIn}
-                  className="text-red-600 font-bold hover:text-red-800 hover:underline transition-colors bg-transparent border-none cursor-pointer"
-                >
-                  Login
-                </button>
-              </p>
+              {currentStep < 3 && (
+                <p className="text-gray-500 text-sm sm:text-md">
+                  Already have an account?{" "}
+                  <button
+                    onClick={onSwitchToSignIn}
+                    className="text-red-600 font-bold hover:text-red-800 hover:underline transition-colors bg-transparent border-none cursor-pointer"
+                  >
+                    Login
+                  </button>
+                </p>
+              )}
             </div>
           </div>
         </div>

@@ -1,10 +1,52 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect } from "react";
-import useAuth from "../../hooks/auth/useAuth";
-import { ForgotPassword, SignIn, SignUp, VerifyOTP } from "./";
+import { createContext, useContext, useEffect, useState } from "react";
+import { ForgotPassword, SignIn, SignUp } from "./";
+
+const AuthModalContext = createContext();
+
+export const useAuthModal = () => {
+  const context = useContext(AuthModalContext);
+  if (!context) {
+    throw new Error("useAuthModal must be used within AuthModalProvider");
+  }
+  return context;
+};
+
+export const AuthModalProvider = ({ children }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [mode, setMode] = useState("signin");
+
+  const openAuth = (authMode = "signin") => {
+    setMode(authMode);
+    setIsOpen(true);
+  };
+
+  const closeAuth = () => {
+    setIsOpen(false);
+  };
+
+  const switchMode = (newMode) => {
+    setMode(newMode);
+  };
+
+  return (
+    <AuthModalContext.Provider
+      value={{
+        isOpen,
+        mode,
+        openAuth,
+        closeAuth,
+        switchMode,
+      }}
+    >
+      {children}
+      <ModalAuthLayout />
+    </AuthModalContext.Provider>
+  );
+};
 
 const ModalAuthLayout = () => {
-  const { mode, step, isOpen, closeAuth, switchAuthMode } = useAuth();
+  const { mode, isOpen, closeAuth, switchMode } = useAuthModal();
 
   // escape key
   useEffect(() => {
@@ -68,29 +110,23 @@ const ModalAuthLayout = () => {
               <div className="w-full">
                 {mode === "signin" && (
                   <SignIn
-                    onSwitchToSignUp={() => switchAuthMode("signup")}
+                    onSwitchToSignUp={() => switchMode("signup")}
                     onSwitchToForgotPassword={() =>
-                      switchAuthMode("forgot-password")
+                      switchMode("forgot-password")
                     }
-                    currentStep={step}
+                    onClose={closeAuth}
                   />
                 )}
                 {mode === "signup" && (
                   <SignUp
-                    onSwitchToSignIn={() => switchAuthMode("signin")}
-                    onSwitchToVerifyOTP={() => switchAuthMode("verify-otp")}
-                    currentStep={step}
+                    onSwitchToSignIn={() => switchMode("signin")}
+                    onClose={closeAuth}
                   />
                 )}
                 {mode === "forgot-password" && (
                   <ForgotPassword
-                    onSwitchToSignIn={() => switchAuthMode("signin")}
-                    currentStep={step}
-                  />
-                )}
-                {mode === "verify-otp" && (
-                  <VerifyOTP
-                    onSwitchToSignIn={() => switchAuthMode("signin")}
+                    onSwitchToSignIn={() => switchMode("signin")}
+                    onClose={closeAuth}
                   />
                 )}
               </div>

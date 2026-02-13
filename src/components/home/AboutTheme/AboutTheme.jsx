@@ -1,6 +1,6 @@
-import React, { useRef, Suspense, useEffect, useState } from "react";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { useGLTF, Environment } from "@react-three/drei";
+import { Environment, useGLTF } from "@react-three/drei";
+import { Canvas, useFrame } from "@react-three/fiber";
+import React, { Suspense, useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 
 // Error Boundary for 3D content
@@ -79,9 +79,9 @@ const MaskModel = (props) => {
         object={scene}
         ref={meshRef}
         {...props}
-      // Overwrite props.rotation with initial referenced value if needed,
-      // but useFrame handles the updates.
-      // We set initial rotation solely to avoid jumps before first frame.
+        // Overwrite props.rotation with initial referenced value if needed,
+        // but useFrame handles the updates.
+        // We set initial rotation solely to avoid jumps before first frame.
       />
 
       {/* 
@@ -121,7 +121,7 @@ const AboutTheme = () => {
       <div className="w-full mb-12 md:mb-24 relative z-20">
         <h1
           className="tracking-wide uppercase text-5xl sm:text-6xl md:text-8xl"
-          style={{ fontFamily: "'Adqila', serif", fontWeight: 400 }}
+          style={{ fontFamily: "'Aquila', serif", fontWeight: 400 }}
         >
           <span className="text-white">About </span>
           <span className="text-[#FDB931]">Theme</span>
@@ -192,10 +192,13 @@ const AboutTheme = () => {
                   }}
                   onCreated={({ gl }) => {
                     // console.log("WebGL Context Created:", gl.info);
-                    gl.domElement.addEventListener("webglcontextlost", (event) => {
-                      event.preventDefault();
-                      console.error("WebGL Context Lost!");
-                    });
+                    gl.domElement.addEventListener(
+                      "webglcontextlost",
+                      (event) => {
+                        event.preventDefault();
+                        console.error("WebGL Context Lost!");
+                      },
+                    );
                   }}
                 >
                   <ambientLight intensity={0.5} />
@@ -206,7 +209,7 @@ const AboutTheme = () => {
                     penumbra={1}
                     intensity={8}
                     color="#FFD700"
-                  // castShadow // Disabled to prevent crash
+                    // castShadow // Disabled to prevent crash
                   />
                   {/* Fill Light from opposite side */}
                   <pointLight

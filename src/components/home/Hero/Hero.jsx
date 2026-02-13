@@ -29,7 +29,9 @@ const Hero = () => {
       className="w-full pt-20 h-screen bg-center bg-no-repeat bg-cover"
       style={{ backgroundImage: "url('https://assets.2026.abhivyaktifest.in/hero.webp')" }}
     >
-      <div className="absolute inset-0 bg-linear-to-b from-black/85 from-0% to-80% to-black/60"></div>
+      <div
+        className="absolute inset-0 bg-linear-to-b from-black/80 from-0% via-black/50 via-80% to-black/90 to-100%"
+      ></div>
       <div className="w-full h-full flex flex-col relative">
         <div className="flex-1 px-4 sm:px-10 md:px-15 py-10 w-full h-fit flex flex-col gap-2 items-center justify-center">
           {/* THE ENCHANTED CIRCUS text */}
@@ -287,7 +289,7 @@ const Hero = () => {
           <div className="w-full flex items-center gap-3">
             <div className="w-[calc((100%-150px)/2)] h-0.5 rounded-full bg-white"></div>
             <div className="w-fit text-white font-bold whitespace-nowrap">
-              19-21st March 2026
+              19-20-21 March 2026
             </div>
             <div className="w-[calc((100%-150px)/2)] h-0.5 rounded-full bg-white"></div>
           </div>

@@ -11,7 +11,7 @@ const TeamHero = () => {
       {/* Background */}
       <div
         className="hero-bg"
-        style={{ backgroundImage: `url(${stageBg})` }}
+        style={{ backgroundImage: `url(${stageBg})`, }}
       />
 
       {/* ABHIVYAKTI branding */}

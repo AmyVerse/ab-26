@@ -1,4 +1,4 @@
-import { motion, animate } from "framer-motion";
+import { animate, motion } from "framer-motion";
 import { useEffect, useRef } from "react";
 import "./ExploreHero.css";
 
@@ -64,7 +64,7 @@ export default function ExploreHero() {
       {/* background */}
       <div
         className="explore-bg"
-        style={{ backgroundImage: `url(${bgExplore})` }}
+        style={{ backgroundImage: `url(${bgExplore})`}}
       />
 
       {/* stage */}
@@ -77,10 +77,7 @@ export default function ExploreHero() {
           animate="visible"
         >
           {visibleCards.map((img, i) => (
-            <div
-              className={`card-wrap pos-${isMobile ? i + 1 : i}`}
-              key={i}
-            >
+            <div className={`card-wrap pos-${isMobile ? i + 1 : i}`} key={i}>
               <motion.img
                 src={img}
                 alt=""

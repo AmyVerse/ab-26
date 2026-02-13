@@ -7,11 +7,12 @@ const abhivyaktiText = "https://assets.2026.abhivyaktifest.in/src/assets/brandin
 const HeroSection = () => {
   return (
     <section className="sponsor-hero">
-
       {/* Background */}
       <div
         className="hero-bg"
-        style={{ backgroundImage: `url(${stageBg})` }}
+        style={{
+          backgroundImage: `url(${stageBg})`,
+        }}
       />
 
       {/* ABHIVYAKTI branding */}
@@ -50,7 +51,6 @@ const HeroSection = () => {
 
       {/* Fade to content */}
       <div className="hero-to-content-gradient" />
-
     </section>
   );
 };

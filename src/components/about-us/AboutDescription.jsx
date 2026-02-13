@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import styles from "./aboutDescription.module.css";
-console.log(styles); // Debug: Check if styles are loaded
 import { sectionVariants, itemVariants } from "../team/team.motion";
 
 const AboutDescription = () => {

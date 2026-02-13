@@ -30,7 +30,7 @@
 }
 
 .title {
-  font-family: "Besta Baru", system-ui, sans-serif;
+  font-family: var(--font-besta-baru);
   font-size: 2.5rem;
   letter-spacing: 0.19rem;
   font-weight: 500;

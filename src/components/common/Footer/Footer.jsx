@@ -1,5 +1,5 @@
-import AbhivyaktiLogo from "@/assets/abhivyaktiSVG/AbhivyaktiLogo";
-import Year2026 from "@/assets/abhivyaktiSVG/Year2026";
+import AbhivyaktiLogo from "@/components/common/Icons/AbhivyaktiLogo";
+import Year2026 from "@/components/common/Icons/Year2026";
 import {
   FaInstagram,
   FaLinkedin,
@@ -12,7 +12,7 @@ function Footer() {
   const quickLinks = [
     { label: "Home", href: "/" },
     { label: "Events", href: "/events" },
-    { label: "Sponsers", href: "/sponsors" },
+    { label: "Sponsorss", href: "/sponsors" },
     { label: "Team", href: "/teams" },
   ];
 

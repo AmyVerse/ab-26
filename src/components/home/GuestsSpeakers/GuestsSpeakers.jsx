@@ -140,7 +140,6 @@ const GuestsSpeakers = () => {
 
   return (
     <section className="guests-speakers-section">
-
       <div className="section-container">
         <div className="section-title">
           {sectionConfig.showSubtitle && (
@@ -149,15 +148,15 @@ const GuestsSpeakers = () => {
               <span className="subtitle-text">{sectionConfig.subtitle}</span>
             </div>
           )}
-          
+
           <h1
-          className="tracking-wide uppercase text-5xl sm:text-6xl md:text-8xl"
-          style={{ fontFamily: "'Adqila', serif", fontWeight: 400 }}
-        >
-          <span className="text-white">GUESTS & </span>
-          <br />
-          <span className="text-[#FDB931]">SPEAKERS</span>
-        </h1>
+            className="tracking-wide uppercase text-5xl sm:text-6xl md:text-8xl"
+            style={{ fontFamily: "'Aquila', serif", fontWeight: 400 }}
+          >
+            <span className="text-white">GUESTS & </span>
+            <br />
+            <span className="text-[#FDB931]">SPEAKERS</span>
+          </h1>
         </div>
 
         <div className="carousel-container">

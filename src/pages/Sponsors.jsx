@@ -1,6 +1,6 @@
+import ComingSoon from "../components/common/ComingSoon/ComingSoon";
 import HeroSection from "../components/sponsors/HeroSection";
 import SponsorsTierSection from "../components/sponsors/SponsorsTierSection";
-import ComingSoon from "../components/common/ComingSoon/ComingSoon";
 
 const Sponsors = () => {
   const tierOne = [{ name: "Sponsor 1", logo: null }];

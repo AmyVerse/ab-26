@@ -60,7 +60,7 @@ const MagicianModel = (props) => {
 
     // Target rotation: Base + small tilt
     const tiltX = 0; // Disable vertical tilt
-    const tiltY = mouseX * 0.2;  // Increased horizontal tilt intensity
+    const tiltY = mouseX * 0.2; // Increased horizontal tilt intensity
 
     // Smooth interpolation
     meshRef.current.rotation.x = THREE.MathUtils.lerp(
@@ -123,9 +123,9 @@ const About = () => {
         />
       </div>
 
-      <div className="w-full h-full bg-black/75 relative z-10">
+      <div className="w-full h-full bg-black/70 relative z-10">
         <div className="w-full h-fit flex flex-col">
-          <div className="px-6 pt-16 pb-4 w-full h-fit bg-linear-to-b from-[#D4AF37]/35 to-transparent flex items-center gap-3 sm:gap-4">
+          <div className="px-6 pt-16 pb-4 w-full h-fit bg-linear-to-b from-black/95 to-transparent flex items-center gap-3 sm:gap-4">
             <motion.div
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
