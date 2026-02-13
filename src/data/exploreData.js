@@ -49,13 +49,13 @@ export const exploreData = {
           ],
 
           prizes: {
-            prize_pool: "₹25,000",
-            first: "₹12,000",
-            second: "₹8,000",
+            prize_pool: "₹20,000",
+            first: "₹10,000",
+            second: "₹5,000",
             third: "₹5,000",
           },
 
-          unstop_link: "#",
+          unstop_link: "https://unstop.com/events/rangreza-abhivyakti-2026-iiitn-1636753",
 
           stages: [
             {
@@ -150,13 +150,13 @@ export const exploreData = {
           ],
 
           prizes: {
-            prize_pool: "₹25,000",
-            first: "₹12,000",
-            second: "₹8,000",
-            third: "₹5,000",
+            prize_pool: "₹15,000",
+            first: "₹10,000",
+            second: "₹5,000",
+            third: "",
           },
 
-          unstop_link: "#",
+          unstop_link: "https://unstop.com/events/showstopper-solo-dance-competition-abhivyakti-2026-iiitn-1636728",
 
           stages: [
             {
@@ -245,13 +245,13 @@ export const exploreData = {
           ],
 
           prizes: {
-            prize_pool: "₹25,000",
-            first: "₹12,000",
-            second: "₹8,000",
+            prize_pool: "₹20,000",
+            first: "₹10,000",
+            second: "₹5,000",
             third: "₹5,000",
           },
 
-          unstop_link: "#",
+          unstop_link: "https://unstop.com/events/melody-hustle-duo-dance-competition-abhivyakti-2026-iiitn-1633165",
 
           stages: [
             {
@@ -347,7 +347,7 @@ export const exploreData = {
             third: "₹5,000",
           },
 
-          unstop_link: "#",
+          unstop_link: "https://unstop.com/events/dance-squad-group-dance-competition-abhivyakti-2026-iiitn-1636730",
 
           stages: [
             {
@@ -448,7 +448,7 @@ export const exploreData = {
             third: "₹5,000",
           },
 
-          unstop_link: "#",
+          unstop_link: "https://unstop.com/events/raagtarangini-band-performance-abhivyakti-2026-iiitn-1623233",
 
           stages: [
             {
@@ -501,13 +501,13 @@ export const exploreData = {
           ],
 
           prizes: {
-            prize_pool: "₹25,000",
-            first: "₹12,000",
-            second: "₹8,000",
-            third: "₹5,000",
+            prize_pool: "₹15,000",
+            first: "₹10,000",
+            second: "₹5,000",
+            third: "",
           },
 
-          unstop_link: "#",
+          unstop_link: "https://unstop.com/events/swarasamar-solo-singing-abhivyakti-2026-iiitn-1624699",
 
           stages: [
             {
@@ -559,13 +559,13 @@ export const exploreData = {
           ],
 
           prizes: {
-            prize_pool: "₹25,000",
-            first: "₹12,000",
-            second: "₹8,000",
-            third: "₹5,000",
+            prize_pool: "₹15,000",
+            first: "₹10,000",
+            second: "₹5,000",
+            third: "",
           },
 
-          unstop_link: "#",
+          unstop_link: "https://unstop.com/events/vadyotsava-abhivyakti-2026-iiitn-1636725",
 
           stages: [
             {
@@ -615,13 +615,13 @@ export const exploreData = {
           ],
 
           prizes: {
-            prize_pool: "₹25,000",
-            first: "₹12,000",
-            second: "₹8,000",
-            third: "₹5,000",
+            prize_pool: "₹5,000",
+            first: "₹3,000",
+            second: "₹2,000",
+            third: "",
           },
 
-          unstop_link: "#",
+          unstop_link: "https://unstop.com/events/beats-barrack-20-abhivyakti-2026-iiitn-1636722",
 
           stages: [
             {
@@ -685,7 +685,7 @@ export const exploreData = {
             second: "₹10,000",
           },
 
-          unstop_link: "#",
+          unstop_link: "https://unstop.com/events/ad-mads-the-advertising-showdown-abhivyakti-2026-iiitn-1624394",
 
           stages: [
             {
@@ -735,12 +735,12 @@ export const exploreData = {
           ],
 
           prizes: {
-            prize_pool: "₹25,000",
-            first: "₹15,000",
-            second: "₹10,000",
+            prize_pool: "₹30,000",
+            first: "",
+            second: "",
           },
 
-          unstop_link: "#",
+          unstop_link: "https://unstop.com/events/directors-cut-interactive-short-film-competition-abhivyakti-2026-iiitn-1624989",
 
           stages: [
             {
@@ -822,12 +822,12 @@ export const exploreData = {
           ],
 
           prizes: {
-            prize_pool: "₹25,000",
-            first: "₹15,000",
-            second: "₹10,000",
+            prize_pool: "₹5,000",
+            first: "₹3,000",
+            second: "₹2,000",
           },
 
-          unstop_link: "#",
+          unstop_link: "https://unstop.com/events/drishtikon-abhivyakti-2026-iiitn-1636726",
 
           stages: [
             {
@@ -902,12 +902,12 @@ export const exploreData = {
           ],
 
           prizes: {
-            prize_pool: "₹25,000",
-            first: "₹15,000",
-            second: "₹10,000",
+            prize_pool: "₹1,20,000",
+            first: "",
+            second: "",
           },
 
-          unstop_link: "#",
+          unstop_link: "https://unstop.com/events/abmun-model-united-nations-abhivyakti-2026-iiitn-1628087",
 
           stages: [
             {
@@ -1111,7 +1111,7 @@ export const exploreData = {
             second: "₹10,000",
           },
 
-          unstop_link: "#",
+          unstop_link: "https://unstop.com/events/dahaad-nukkad-natak-competition-abhivyakti-2026-iiitn-1636737",
 
           stages: [
             {
@@ -1168,12 +1168,12 @@ export const exploreData = {
           ],
 
           prizes: {
-            prize_pool: "₹25,000",
-            first: "₹15,000",
-            second: "₹10,000",
+            prize_pool: "₹5,000",
+            first: "₹3,000",
+            second: "₹2,000",
           },
 
-          unstop_link: "#",
+          unstop_link: "https://unstop.com/events/rasdhara-online-poetry-writing-competition-abhivyakti-2026-iiitn-1633179",
 
           stages: [
             {
@@ -1265,12 +1265,12 @@ export const exploreData = {
           ],
 
           prizes: {
-            prize_pool: "₹25,000",
-            first: "₹15,000",
-            second: "₹10,000",
+            prize_pool: "₹15,000",
+            first: "₹10,000",
+            second: "₹5,000",
           },
 
-          unstop_link: "#",
+          unstop_link: "https://unstop.com/events/dj-wars-crowd-control-edition-abhivyakti-2026-iiitn-1638697",
 
           stages: [
             {
@@ -1499,12 +1499,12 @@ export const exploreData = {
           ],
 
           prizes: {
-            prize_pool: "₹15,000",
-            first: "",
-            second: "",
+            prize_pool: "₹20,000",
+            first: "₹10,000",
+            second: "₹5,000",
           },
 
-          unstop_link: "#",
+          unstop_link: "https://unstop.com/events/bloodline-battles-bgmi-abhivyakti-2026-iiitn-1628064",
 
           stages: [
             {
@@ -1620,7 +1620,7 @@ export const exploreData = {
             second: "",
           },
 
-          unstop_link: "#",
+          unstop_link: "https://unstop.com/events/firestrom-rampage-free-fire-abhivyakti-2026-iiitn-1626901",
 
           stages: [
             {

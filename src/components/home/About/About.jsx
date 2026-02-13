@@ -233,7 +233,7 @@ const About = () => {
           </div>
         </div>
         <div className="px-4 sm:px-8 pt-8 sm:pt-12 pb-16 sm:pb-24 grid place-items-center">
-          <div className="w-full max-w-xs sm:max-w-sm md:max-w-lg lg:max-w-230 border-2 border-white/30 backdrop-blur-2xl p-3 sm:p-5 md:px-16 md:py-8 rounded-2xl sm:rounded-3xl lg:rounded-4xl">
+          {/* <div className="w-full max-w-xs sm:max-w-sm md:max-w-lg lg:max-w-230 border-2 border-white/30 backdrop-blur-2xl p-3 sm:p-5 md:px-16 md:py-8 rounded-2xl sm:rounded-3xl lg:rounded-4xl">
             <div className="w-full aspect-video sm:h-120 border-4 border-double border-amber-200/30 overflow-hidden rounded-xl sm:rounded-2xl lg:rounded-3xl">
               <iframe
                 width="100%"
@@ -245,7 +245,7 @@ const About = () => {
                 allowFullScreen
               ></iframe>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>
