@@ -12,9 +12,19 @@ function Footer() {
   const quickLinks = [
     { label: "Home", href: "/" },
     { label: "About", href: "/about" },
+    { label: "Events", href: "/explore#competitions" },
+    { label: "Passes & Stay", href: "/passes" },
     { label: "Sponsors", href: "/sponsors" },
-    { label: "Contact Us", href: "/contact" },
+    { label: "Teams", href: "/teams" },
   ];
+
+  const organizationLinks = [
+    { label: "Contact Us", href: "/contact" },
+    { label: "Terms & Conditions", href: "/terms" },
+    { label: "Privacy Policy", href: "/privacy" },
+    { label: "Shipping Policy", href: "/shipping" },
+    { label: "Cancellation & Refunds", href: "/cancellation" },
+  ]
 
   return (
     <footer className="font-[Gabarito] text-white w-full flex flex-col overflow-x-hidden">
@@ -55,7 +65,7 @@ function Footer() {
             className="size-full object-cover object-center"
           />
         </div>
-        <div className="absolute bg-linear-to-b from-black to-20% to-black/20 inset-x-0 top-0 w-full px-4 sm:px-5 md:px-8 lg:px-12 xl:px-26 py-4 sm:py-5 md:py-9 lg:py-11 xl:py-12 z-1 pointer-events-none flex flex-col justify-start items-stretch h-full overflow-y-auto overflow-x-hidden">
+        <div className="absolute bg-linear-to-b from-black to-20% to-black/20 inset-x-0 top-0 w-full px-4 sm:px-5 md:px-8 lg:px-12 xl:px-26 py-4 sm:py-5 md:py-9 lg:py-11 xl:py-12 z-1 pointer-events-none flex flex-col justify-start items-stretch min-h-full overflow-hidden">
           <div className="pointer-events-auto flex flex-col md:flex-row gap-8 lg:gap-10 xl:gap-22 max-w-306.75 items-start mx-auto w-full">
             <div className="flex flex-col w-full gap-2 sm:4 md:w-auto md:max-w-95 xl:w-109 shrink-0">
               <h3 className="text-base md:text-lg font-normal leading-tight tracking-widest">
@@ -68,8 +78,9 @@ function Footer() {
               </p>
             </div>
 
-            <div className="flex-1 flex flex-col gap-4 md:gap-8 lg:gap-10 min-w-0">
-              <div className="flex flex-col md:flex-row gap-7 md:gap-7 lg:gap-18 flex-wrap">
+            <div className="w-full md:flex-1 min-w-0">
+              <div
+                className="grid grid-cols-2 xl:grid-cols-4 gap-y-8 gap-x-10 md:gap-x-14 lg:gap-x-20 ">
                 <div className="flex flex-col gap-2 sm:gap-4 w-full md:w-auto md:min-w-35 xl:w-32">
                   <h3 className="text-base md:text-lg font-normal leading-tight tracking-widest">
                     Quick Links
@@ -77,6 +88,26 @@ function Footer() {
                   <nav aria-label="Quick links">
                     <ul className="flex flex-col sm:gap-2">
                       {quickLinks.map((link) => (
+                        <li key={link.label}>
+                          <Link
+                            to={link.href}
+                            className="relative group inline-block text-sm md:text-base font-normal leading-tight tracking-widest text-neutral-200 no-underline transition-colors duration-300 hover:text-white"
+                          >
+                            {link.label}
+                            <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-yellow-500 transition-all duration-300 ease-out group-hover:w-full"></span>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </nav>
+                </div>
+                <div className="flex flex-col gap-2 sm:gap-4 w-full md:w-auto md:min-w-35 xl:w-32">
+                  <h3 className="text-base md:text-lg font-normal leading-tight tracking-widest">
+                    Organization
+                  </h3>
+                  <nav aria-label="Quick links">
+                    <ul className="flex flex-col sm:gap-2">
+                      {organizationLinks.map((link) => (
                         <li key={link.label}>
                           <Link
                             to={link.href}
@@ -158,16 +189,13 @@ function Footer() {
             </div>
           </div>
           <div className="sm:hidden flex-1"></div>
-          <p className="pointer-events-auto text-sm font-normal leading-normal tracking-wide text-white/80 my-[6%] text-left sm:text-center">
+          <p className="pointer-events-auto text-xl font-semibold leading-normal tracking-wide text-white/80 my-[6%] text-center">
             Abhivyakti 2026 @All Rights Reserved
             <br />
             Meet our{" "}
             <Link
               to="/developers"
-              className="relative bg-linear-to-r from-rose-600 to-rose-950 bg-clip-text text-transparent
-             after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-0
-             after:bg-linear-to-r after:from-rose-600 after:to-rose-950
-             hover:after:w-full after:transition-all after:duration-300"
+              className="relative bg-linear-to-r from-rose-500 to-rose-950 bg-clip-text text-transparent after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-0 after:bg-linear-to-r after:from-rose-600 after:to-rose-950 hover:after:w-full after:transition-all after:duration-300"
             >
               Developers
             </Link>

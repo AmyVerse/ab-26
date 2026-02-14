@@ -16,6 +16,10 @@ import Sponsors from "./pages/Sponsors";
 import Teams from "./pages/Teams";
 import Developers from "./pages/Developers";
 import TestPay from "./pages/TestPay";
+import TermsAndConditions from "./pages/TermsAndConditions";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import ShippingPolicy from "./pages/ShippingPolicy";
+import CancellationAndRefunds from "./pages/CancellationAndRefunds";
 
 function App() {
   // useEffect(() => {
@@ -83,6 +87,10 @@ function App() {
             <Route path="/passes" element={<PassesStay />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/testpay" element={<TestPay />} />
+            <Route path="/terms" element={<TermsAndConditions />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
+            <Route path="/shipping" element={<ShippingPolicy />} />
+            <Route path="/cancellation" element={<CancellationAndRefunds />} />
           </Routes>
 
           <Footer />

@@ -205,10 +205,10 @@ const GuestsSpeakers = () => {
                         <img src={speaker.image} alt={speaker.name} />
                       </div> */}
 
-                      <div className="designation-text">
+                      {/* <div className="designation-text">
                         {speaker.designation}
-                      </div>
-                      <div className="guest-name-text">{speaker.name}</div>
+                      </div> */}
+                      {/* <div className="guest-name-text">{speaker.name}</div> */}
                     </div>
                   </div>
                 </div>
