@@ -991,8 +991,8 @@ export const exploreData = {
 
                   "Delegates must maintain formal decorum and respect the Chair and other delegates.",
                   "Delegates must use formal language and avoid personal pronouns.",
-                  "Delegates should refer to themselves as 'the delegate of [Country]'."
-                ]
+                  "Delegates should refer to themselves as 'the delegate of [Country]'.",
+                ],
               },
             },
           ],
@@ -1009,9 +1009,8 @@ export const exploreData = {
             "Inappropriate content, obscenity, or vulgarity will lead to disqualification.",
             "Judges’ decisions will be final.",
             "In case of any disputes, the decision made by the Organizing Committee (OC) will be final. The OC also holds the right to disqualify any team in case of discrepancies.",
-            "Undergraduate, Postgraduate, and School students are eligible for the competition."
+            "Undergraduate, Postgraduate, and School students are eligible for the competition.",
           ],
-
 
           contact: {
             name: "Rutva Gandhi",
@@ -1898,24 +1897,24 @@ export const exploreData = {
         },
         {
           id: "esports_4",
-          name: "Royal Legends",
+          name: "Royale Legends",
           organizers: "Synergy",
           type: "Clash Royale",
           mode: "Offline",
           min_team_size: 1,
-          max_team_size: 2,
+          max_team_size: 1,
           bg_img:
             "https://assets.2026.abhivyaktifest.in/images/explore/events/synergy.png",
 
           description: [
-            "The gaming competitions under Abhivyakti are curated to complement the cultural spirit of the fest while maintaining competitive integrity. These events aim to attract enthusiastic gamers, encourage teamwork, and provide a high-energy experience for participants as well as spectators.",
-            "We invite passionate and disciplined gamers who are eager to compete, collaborate, and represent their skills on a prominent cultural platform. Participants are expected to uphold the values of fairness, respect, and sportsmanship throughout the event",
+            "Abhivyakti is the annual cultural fest of IIIT Nagpur and the largest student-driven event of the institute. It is a celebration of talent, creativity, collaboration, and innovation, bringing together students from colleges across the country.",
+            "The gaming events conducted during Abhivyakti are organized under the banner of the Synergy Esports Club, providing a structured yet vibrant competitive environment as part of the cultural fest.",
+            "These events are curated to complement the cultural spirit of the fest while maintaining competitive integrity. We invite passionate and disciplined gamers who are eager to compete, collaborate, and represent their skills on a prominent cultural platform.",
           ],
 
           prizes: {
             prize_pool: "₹5,000",
-            // first: "",
-            // second: "",
+            registration_fee: "₹100 per player",
           },
 
           unstop_link: "#",
@@ -1923,25 +1922,27 @@ export const exploreData = {
           stages: [
             {
               id: "round_1",
-              title: "Round 1: Preliminary Round",
-              start_date: "15th February 2026",
-              end_date: "10th March 2026",
+              title: "Stage 1: Preliminary Round",
+              start_date: "14th & 15th March 2026",
+              end_date: "15th March 2026",
 
               description: [
-                "Preliminary rounds will be conducted online to allow wide participation. Teams or players will compete in knockout or pool-based formats depending on the number of registrations.",
+                "Preliminary rounds will be conducted offline to ensure direct participation and fair play. Players will compete in Single Elimination or Swiss League format based on total registrations.",
               ],
 
               submission_requirements: [
                 {
-                  details: [
+                  format: [
                     "Conducted offline",
                     "Single Elimination / Swiss League (organizer choice)",
                     "Matches played using Friendly Battles",
+                  ],
+                  match_rules: [
                     "Match Type: Best of 3 (BO3)",
                     "Tie-Breaker: Sudden Death (default)",
                     "Time Limit: Standard game rules",
                   ],
-                  Qualification: [
+                  qualification: [
                     "Players advance based on match wins",
                     "Top 10 or Top 12 players qualify for Semi-Finals",
                     "Qualification decided by win-loss record / points",
@@ -1951,55 +1952,67 @@ export const exploreData = {
             },
             {
               id: "round_2",
-              title: "Round 2: Semi-Finals",
-              start_date: "",
-              end_date: "",
+              title: "Stage 2: Semi-Finals",
+              start_date: "TBA",
+              end_date: "TBA",
 
               description: [
-                "Top-performing teams or players from the prelims will advance to the final stage, which may be conducted offline at the Abhivyakti venue.",
+                "Top-performing players from the preliminary rounds advance to the semi-finals, which will be conducted offline at the Abhivyakti venue.",
               ],
 
               submission_requirements: [
                 {
-                  details: [
-                    "8 Players Qualify",
+                  participants: "8 Qualified Players",
+                  format: [
                     "Players divided into 2 groups of 4",
-                    "Round-Robin format",
-                    "SF1: Rank 1 (Group A) vs Rank 2 (Group B)",
-                    "SF2: Rank 1 (Group B) vs Rank 2 (Group A)",
-                    "Top 2 from each group → Grand Final Stage (Top 4)",
-                    "Match Type: Best of 3",
-                    "Conducted offline",
+                    "Round-Robin format within groups",
+                    "Top 2 from each group advance to Grand Final (Top 4)",
                   ],
-                  Qualification: [],
+                  match_rules: ["Match Type: Best of 3", "Conducted offline"],
                 },
               ],
             },
             {
               id: "round_3",
-              title: "Round 3: Grand Final",
-              start_date: "",
-              end_date: "",
+              title: "Stage 3: Grand Final",
+              start_date: "19th or 20th March 2026",
+              end_date: "20th March 2026",
 
               description: [
-                "Top-performing teams or players from the prelims will advance to the final stage, which may be conducted offline at the Abhivyakti venue.",
+                "The top 4 players compete for the championship title. Semi-finals determine finalists for the ultimate championship match.",
               ],
 
               submission_requirements: [
                 {
-                  details: [
-                    "Top 4 Players",
-                    "Match Type: BO3",
-                    "Winners of SF1 & SF2",
+                  participants: "Top 4 Players",
+                  semi_finals: [
+                    "SF1: Rank 1 (Group A) vs Rank 2 (Group B)",
+                    "SF2: Rank 1 (Group B) vs Rank 2 (Group A)",
                     "Match Type: Best of 3",
                   ],
-                  Qualification: [],
+                  grand_final: [
+                    "Winners of SF1 & SF2 compete",
+                    "Match Type: Best of 3",
+                    "Winner declared Tournament Champion",
+                  ],
                 },
               ],
             },
           ],
 
+          game_details: {
+            game: "Clash Royale",
+            mode: "1v1 Competitive",
+            platform: "Mobile",
+            tournament_type: "Offline",
+            deck_type: "Open Deck",
+            level_cap: "Tournament Standard (organizer decision)",
+          },
+
           rules: [
+            "Open to students from any recognized college or university.",
+            "Participants may register individually depending on the game format.",
+            "A participant may compete for only one team in a particular event.",
             "Advancement will be based on match outcomes and performance.",
             "Use of cheats, hacks, exploits, or unfair practices will result in immediate disqualification.",
             "Participants must adhere strictly to schedules and organizer instructions.",
@@ -2014,6 +2027,7 @@ export const exploreData = {
             name: "Mouryagna Baindla",
             email: "bt24csa015@iiitn.ac.in",
             phone: "9603664455",
+            coordinator: "Synergy Esports Club – IIIT Nagpur",
           },
         },
         {

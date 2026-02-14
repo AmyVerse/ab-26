@@ -63,15 +63,12 @@ const UserProfile = ({ user, logout }) => {
             >
                 {/* Profile Trigger */}
                 <button
-                    className="flex items-center gap-3 focus:outline-none group"
+                    className="flex cursor-pointer items-center gap-3 focus:outline-none group"
                     title={user?.first_name || "Profile"}
                 >
                     <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-linear-to-br from-yellow-400 to-yellow-600 flex items-center justify-center text-white font-semibold shadow-[0_0_15px_rgba(234,179,8,0.3)] group-hover:shadow-[0_0_20px_rgba(234,179,8,0.6)] transition-all duration-300 border-2 border-white/20 group-hover:border-yellow-300">
                         {user?.first_name?.charAt(0)?.toUpperCase() || "U"}
                     </div>
-                    <span className="hidden lg:block text-white font-medium text-base group-hover:text-yellow-300 transition-colors">
-                        {user?.first_name || "User"}
-                    </span>
                 </button>
 
                 {/* Hover Dropdown Menu */}
@@ -154,7 +151,6 @@ const UserProfile = ({ user, logout }) => {
                 </AnimatePresence>
             </div>
 
-            {/* Team Details Modal */}
             {/* Team Details Modal */}
             {mounted && createPortal(
                 <AnimatePresence>

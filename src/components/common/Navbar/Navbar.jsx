@@ -320,7 +320,7 @@ const Navbar = () => {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            className="fixed inset-0 z-50 block"
+            className="fixed inset-0 z-9999 block"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

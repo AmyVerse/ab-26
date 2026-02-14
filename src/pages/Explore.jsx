@@ -13,13 +13,14 @@ const Explore = () => {
   const [activeTab, setActiveTab] = useState("proShows");
   const tabsRef = useRef(null);
 
-  // Initialize from URL hash on mount and scroll to tabs
+  // Initialize from URL hash on mount and scroll to top
   useEffect(() => {
     const hashTab = window.location.hash.replace("#", "");
     if (hashTab && VALID_TABS.includes(hashTab)) {
       setActiveTab(hashTab);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
-  }, []);
+  }, [])
 
   // Update URL hash when tab changes
   const handleTabChange = (tabKey) => {
