@@ -1,10 +1,13 @@
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import "./TeamHero.css";
 
 const abhivyaktiText = "https://assets.2026.abhivyaktifest.in/src/assets/branding/abhivyakti text-yellow.webp";
 const stageBg = "https://assets.2026.abhivyaktifest.in/src/assets/background/background-curtains.webp";
 
 const TeamHero = () => {
+  const navigate = useNavigate();
+
   return (
     <section className="team-hero">
 
@@ -37,8 +40,8 @@ const TeamHero = () => {
 
       {/* CTA */}
       <div className="hero-cta">
-        <button className="cta-btn">AB Teams</button>
-        <button className="cta-btn">Clubs</button>
+        <button className="cta-btn" onClick={() => navigate("/developers")}>Developers</button>
+        {/* <button className="cta-btn">Clubs</button> */}
       </div>
 
       {/* Scroll Down Button */}

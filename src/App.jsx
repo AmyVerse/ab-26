@@ -1,4 +1,5 @@
 import Lenis from "lenis";
+import { Analytics } from "@vercel/analytics/react";
 import { useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { AuthModalProvider } from "./components/auth/ModalAuthLayout";
@@ -64,6 +65,7 @@ function App() {
     <ToastProvider>
       {/* Auth modal provider */}
       <AuthModalProvider>
+        <Analytics />
         <ScrollToTop />
         <div className="min-h-screen">
           {/* obv the navbar */}
