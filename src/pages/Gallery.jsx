@@ -63,15 +63,18 @@ const Gallery = () => {
         ref={wrapperRef}
         className="relative w-full h-screen bg-black flex flex-col items-center justify-center overflow-hidden"
       >
-        {/* Fixed Header (Optional, stays at top of screen or inside wrapper) */}
-        <div className="absolute top-0 left-0 w-full z-20 bg-black/80 backdrop-blur-md border-b border-white/10 flex justify-center">
-             <div className="flex items-center justify-center gap-4 py-8 px-4 w-full max-w-[1400px]">
-                <div className="h-[2px] w-1/4 max-w-[200px] bg-gradient-to-r from-transparent to-[#D4AF37]" />
-                <h1 className="text-3xl md:text-5xl font-[Gabarito] font-bold text-[#D4AF37] tracking-[0.2em] uppercase drop-shadow-[0_2px_4px_rgba(212,175,55,0.5)]">
-                  Gallery
-                </h1>
-                <div className="h-[2px] w-1/4 max-w-[200px] bg-gradient-to-l from-transparent to-[#D4AF37]" />
-              </div>
+        {/* Fixed Header (Positioned below Navbar) */}
+        <div className="absolute top-[85px] left-0 w-full z-20 bg-black/80 backdrop-blur-md border-b border-white/5 flex justify-center">
+          <div className="flex items-center justify-center gap-4 py-6 px-0 w-full"> {/* Reduced py from 8 to 6 for compactness */}
+            <div className="h-[2px] flex-1 bg-gradient-to-r from-transparent to-[#611a14]" />
+            <h1 
+              className="text-4xl md:text-5xl lg:text-6xl text-[#F5F5F0] tracking-[0.15em] uppercase drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] px-4"
+              style={{ fontFamily: '"Besta Baru", serif' }}
+            >
+              Gallery
+            </h1>
+            <div className="h-[2px] flex-1 bg-gradient-to-l from-transparent to-[#611a14]" />
+          </div>
         </div>
 
         {/* 
@@ -80,7 +83,7 @@ const Gallery = () => {
         */}
         <div 
           ref={viewportRef}
-          className="relative w-full max-w-[1400px] h-[80vh] overflow-hidden mt-[100px]" // Top margin to clear header
+          className="relative w-full max-w-[1400px] h-[65vh] overflow-hidden mt-[220px]" // Increased margin to clear Navbar + Header
         >
           {/* Top Gradient Mask */}
           <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-black to-transparent z-10 pointer-events-none" />

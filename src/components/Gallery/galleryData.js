@@ -122,19 +122,19 @@ export const items = [
   {
     id: "21",
     img: "https://picsum.photos/id/1015/600/900?grayscale",
-    url: "https://example.com/one",
+    url: "",
     height: 400,
   },
   {
     id: "22",
     img: "https://picsum.photos/id/1011/600/750?grayscale",
-    url: "https://example.com/two",
+    url: "",
     height: 250,
   },
   {
     id: "23",
     img: "https://picsum.photos/id/1020/600/800?grayscale",
-    url: "https://example.com/three",
+    url: "",
     height: 600,
   },
   {
