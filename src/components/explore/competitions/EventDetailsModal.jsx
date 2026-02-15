@@ -151,7 +151,7 @@ const EventDetailsModal = ({ event, onClose, onOpenRegistration }) => {
                         </ul>
                       ) : typeof stage.submission_requirements === "object" ? (
                         <>
-                          {stage.submission_requirements.rules && (
+                          {/* {stage.submission_requirements.rules && (
                             <div>
                               <h5>Rules</h5>
                               <ul>
@@ -174,6 +174,25 @@ const EventDetailsModal = ({ event, onClose, onOpenRegistration }) => {
                                 )}
                               </ul>
                             </div>
+                          )} */}
+                          {Object.entries(stage.submission_requirements).map(
+                            ([key, value]) =>
+                              Array.isArray(value) &&
+                              value.length > 0 && (
+                                <div key={key}>
+                                  <h5>
+                                    {key
+                                      .replace(/_/g, " ")
+                                      .replace(/\b\w/g, (c) => c.toUpperCase())}
+                                  </h5>
+
+                                  <ul>
+                                    {value.map((item, i) => (
+                                      <li key={i}>{item}</li>
+                                    ))}
+                                  </ul>
+                                </div>
+                              ),
                           )}
                           {/* Render other string properties like file_format if they exist as keys */}
                           {Object.entries(stage.submission_requirements).map(

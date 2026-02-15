@@ -1,6 +1,8 @@
 import { Analytics } from "@vercel/analytics/react";
 import Lenis from "lenis";
 import { useEffect } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { AuthModalProvider } from "./components/auth/ModalAuthLayout";
 import Footer from "./components/common/Footer/Footer";
@@ -21,6 +23,9 @@ import Teams from "./pages/Teams";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import TestPay from "./pages/TestPay";
 import UserData from "./pages/UserData";
+import Gallery from "./pages/Gallery";
+
+gsap.registerPlugin(ScrollTrigger);
 
 function App() {
   // useEffect(() => {
@@ -40,12 +45,16 @@ function App() {
       smoothWheel: true,
     });
 
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
+    // Connect Lenis to GSAP ScrollTrigger
+    lenis.on('scroll', ScrollTrigger.update);
 
-    requestAnimationFrame(raf);
+    // Use GSAP's ticker to drive Lenis for perfect synchronization
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+
+    // Disable GSAP's lag smoothing to prevent stuttering
+    gsap.ticker.lagSmoothing(0);
 
     return () => {
       lenis.destroy();
@@ -93,6 +102,7 @@ function App() {
             <Route path="/shipping" element={<ShippingPolicy />} />
             <Route path="/cancellation" element={<CancellationAndRefunds />} />
             <Route path="/myaccount" element={<UserData />} />
+            {/* <Route path="/gallery" element={<Gallery />} /> */}
           </Routes>
 
           <Footer />
