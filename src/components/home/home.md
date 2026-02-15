@@ -4,7 +4,7 @@
 
 - Hero
 - About (AB)
-- Explore
+- Events
 - Guests and Speakers
 - Sponsors
 - About Theme

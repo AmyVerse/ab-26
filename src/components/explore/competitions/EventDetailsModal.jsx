@@ -75,10 +75,19 @@ const EventDetailsModal = ({ event, onClose, onOpenRegistration }) => {
 
                   {stage.submission_requirements && (
                     <div className={styles.submissionReqs}>
-                      <h4>{stage.submission_requirements.title || "Submission Requirements"}</h4>
-                      {Array.isArray(stage.submission_requirements.rules || stage.submission_requirements) ? (
+                      <h4>
+                        {stage.submission_requirements.title ||
+                          "Submission Requirements"}
+                      </h4>
+                      {Array.isArray(
+                        stage.submission_requirements.rules ||
+                          stage.submission_requirements,
+                      ) ? (
                         <ul>
-                          {(stage.submission_requirements.rules || stage.submission_requirements).map((req, i) => {
+                          {(
+                            stage.submission_requirements.rules ||
+                            stage.submission_requirements
+                          ).map((req, i) => {
                             if (typeof req === "string") {
                               return <li key={i}>{req}</li>;
                             } else if (
@@ -345,13 +354,25 @@ const EventDetailsModal = ({ event, onClose, onOpenRegistration }) => {
 
             <div className={styles.prizeBreakdown}>
               <div className={styles.breakdownItem}>
-                {firstPrize && <><span>1st -</span> <span>{firstPrize}</span></>}
+                {firstPrize && (
+                  <>
+                    <span>1st</span> <span>{firstPrize}</span>
+                  </>
+                )}
               </div>
               <div className={styles.breakdownItem}>
-                {secondPrize && <><span>2nd -</span> <span>{secondPrize}</span></>}
+                {secondPrize && (
+                  <>
+                    <span>2nd</span> <span>{secondPrize}</span>
+                  </>
+                )}
               </div>
               <div className={styles.breakdownItem}>
-                {thirdPrize && <><span>3rd -</span> <span>{thirdPrize}</span></>}
+                {thirdPrize && (
+                  <>
+                    <span>3rd</span> <span>{thirdPrize}</span>
+                  </>
+                )}
               </div>
             </div>
           </div>

@@ -8,92 +8,51 @@ export const createPaymentOrder = async ({
   passTypeId,
   accommodationTypeId,
 }) => {
-  try {
-    const response = await fetch(`${BACKEND_URL}/api/payment/create-order`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userId,
-        amount,
-        eventId,
-        teamId,
-        passTypeId,
-        accommodationTypeId,
-      }),
-    });
+  const response = await fetch(`${BACKEND_URL}/api/payment/create-order`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      userId,
+      amount,
+      eventId,
+      teamId,
+      passTypeId,
+      accommodationTypeId,
+    }),
+  });
 
-    const data = await response.json();
+  const data = await response.json();
 
-    if (!response.ok) {
-      throw new Error(data.message || "Failed to create payment order");
-    }
-
-    return data;
-  } catch (error) {
-    console.error("Payment order creation failed:", error.message);
-    throw error;
+  if (!response.ok) {
+    throw new Error(data.message || "Failed to create payment order");
   }
+
+  return data;
 };
 
 export const completePayment = async (paymentData) => {
-  try {
-    const response = await fetch(`${BACKEND_URL}/api/payment/complete`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(paymentData),
-    });
+  const response = await fetch(`${BACKEND_URL}/api/payment/complete`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(paymentData),
+  });
 
-    const data = await response.json();
+  const data = await response.json();
 
-    if (!response.ok) {
-      throw new Error(
-        data.message || `Payment verification failed: ${response.status}`,
-      );
-    }
-
-    return data;
-  } catch (error) {
-    console.error("Payment verification error:", error.message);
-    throw error;
-  }
-};
-
-export const checkPaymentStatus = async (orderId, userId) => {
-  try {
-    const response = await fetch(
-      `${BACKEND_URL}/api/payment/status/${orderId}?userId=${userId}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      },
+  if (!response.ok) {
+    throw new Error(
+      data.message || `Payment verification failed: ${response.status}`,
     );
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.message || "Failed to fetch payment status");
-    }
-
-    return data;
-  } catch (error) {
-    console.error("Payment status check failed:", error.message);
-    throw error;
   }
+
+  return data;
 };
 
-export const initializeRazorpay = (
-  orderData,
-  userDetails,
-  purchaseType,
-  onSuccess,
-  onError,
-) => {
+export const initializeRazorpay = (orderData, userDetails, purchaseType) => {
   return new Promise((resolve, reject) => {
     const script = document.createElement("script");
     script.src = "https://checkout.razorpay.com/v1/checkout.js";
@@ -113,9 +72,6 @@ export const initializeRazorpay = (
         name: "AB26 Event",
         description: description,
         handler: function (response) {
-          if (onSuccess) {
-            onSuccess(response);
-          }
           resolve(response);
         },
         prefill: {
@@ -128,9 +84,7 @@ export const initializeRazorpay = (
         },
         modal: {
           ondismiss: function () {
-            if (onError) {
-              onError("Payment cancelled by user");
-            }
+            reject(new Error("Payment cancelled by user"));
           },
         },
       };
@@ -138,11 +92,7 @@ export const initializeRazorpay = (
       const rzp = new window.Razorpay(options);
 
       rzp.on("payment.failed", function (response) {
-        const errorMsg = `Payment failed: ${response.error.description}`;
-        if (onError) {
-          onError(errorMsg);
-        }
-        reject(new Error(errorMsg));
+        reject(new Error(`Payment failed: ${response.error.description}`));
       });
 
       rzp.open();

@@ -11,12 +11,16 @@ const getErrorMessage = (error) => {
   if (errorStr.includes("user") || errorStr.includes("not found"))
     return "Account not found. Please sign up";
   if (errorStr.includes("email")) return "Please check your email";
-  if (errorStr.includes("network") || errorStr.includes("connect"))
+  if (
+    errorStr.includes("network") ||
+    errorStr.includes("connect") ||
+    errorStr.includes("failed to fetch")
+  )
     return "Network error. Check your connection";
+  if (errorStr.includes("cors"))
+    return "Connection issue. Check your network and try again";
   if (errorStr.includes("json") || errorStr.includes("parse"))
-    return "Can't login at this moment. Try again later";
-  if (errorStr.includes("timeout"))
-    return "Request took too long. Please try again";
+    return "Server connection issue. Please try again";
 
   return "Can't login at this moment. Try again later";
 };
@@ -42,28 +46,38 @@ const SignIn = ({ onSwitchToSignUp, onSwitchToForgotPassword, onClose }) => {
     e.preventDefault();
     setIsLoading(true);
 
-    await signIn.email(
-      {
-        email: formData.email,
-        password: formData.password,
-      },
-      {
-        onSuccess: () => {
-          setIsLoading(false);
-          showToast("Login successful", "success");
-          onClose();
+    try {
+      await signIn.email(
+        {
+          email: formData.email,
+          password: formData.password,
         },
-        onError: (ctx) => {
-          setIsLoading(false);
-          showToast(getErrorMessage(ctx.error), "error");
+        {
+          onSuccess: () => {
+            setIsLoading(false);
+            showToast("Login successful", "success");
+            onClose();
+          },
+          onError: (ctx) => {
+            setIsLoading(false);
+            const errorMsg = getErrorMessage(ctx.error);
+            showToast(errorMsg, "error");
+          },
         },
-      },
-    );
+      );
+    } catch (err) {
+      setIsLoading(false);
+      if (err.name !== "AbortError") {
+        const errorMsg = getErrorMessage(err);
+        showToast(errorMsg, "error");
+      }
+    }
   };
 
   const handleGoogleSubmit = async (e) => {
     e.preventDefault();
     setIsGoogleLoading(true);
+
     try {
       const frontendUrl =
         import.meta.env.VITE_FRONTEND_URL || window.location.origin;
@@ -75,12 +89,16 @@ const SignIn = ({ onSwitchToSignUp, onSwitchToForgotPassword, onClose }) => {
       });
     } catch (err) {
       setIsGoogleLoading(false);
-      showToast(getErrorMessage(err), "error");
+
+      if (err.name !== "AbortError") {
+        const errorMsg = getErrorMessage(err);
+        showToast(errorMsg, "error");
+      }
     }
   };
 
   return (
-    <div className="flex flex-col md:flex-row md:min-h-162.5 tracking-wide">
+    <div className="flex flex-col md:flex-row tracking-wide">
       <div className="hidden md:flex md:w-1/2 items-start justify-start p-6 text-white text-center relative bg-gray-900 rounded-l-lg">
         <span className="text-xl font-semibold z-10 relative select-none">
           Abhivyakti'26
@@ -92,7 +110,7 @@ const SignIn = ({ onSwitchToSignUp, onSwitchToForgotPassword, onClose }) => {
         />
       </div>
 
-      <div className="w-full md:w-1/2 flex items-center justify-center p-6 bg-white rounded-r-lg">
+      <div className="w-full md:w-1/2 flex items-center justify-center pt-8 p-6 bg-white rounded-r-lg">
         <div className="w-full">
           <div className="mb-6 sm:mb-8">
             <h2 className="text-3xl sm:text-4xl font-semibold text-gray-900 ">
@@ -146,7 +164,7 @@ const SignIn = ({ onSwitchToSignUp, onSwitchToForgotPassword, onClose }) => {
             <button
               type="submit"
               className="bg-[#3C0919] border-2 tracking-wider text-white border-none p-2 sm:p-3 text-lg sm:text-xl cursor-pointer transition-all duration-200 mt-2 disabled:opacity-70 disabled:cursor-not-allowed hover:bg-[#5a0d29] hover:transform hover:shadow-lg"
-              disabled={isLoading}
+              disabled={isLoading || isGoogleLoading}
             >
               {isLoading ? "Signing In..." : "Continue"}
             </button>
@@ -154,7 +172,7 @@ const SignIn = ({ onSwitchToSignUp, onSwitchToForgotPassword, onClose }) => {
               onClick={handleGoogleSubmit}
               type="button"
               className="p-2 sm:p-3 border-2 -mt-2 md:-mt-3 tracking-wider border-gray-600 text-lg sm:text-xl font-medium cursor-pointer transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed hover:bg-[#3c09191e]"
-              disabled={isGoogleLoading}
+              disabled={isLoading || isGoogleLoading}
             >
               {isGoogleLoading ? "Signing In..." : "Continue with Google"}
             </button>

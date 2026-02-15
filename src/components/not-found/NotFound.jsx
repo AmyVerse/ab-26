@@ -49,7 +49,7 @@ const NotFound = () => {
             Back to Home
           </Link>
           <Link
-            to="/explore"
+            to="/events"
             className="rounded-lg border border-yellow-300/50 px-6 py-3 text-sm font-semibold text-yellow-200 transition hover:border-yellow-200 hover:text-yellow-100"
           >
             Explore Events

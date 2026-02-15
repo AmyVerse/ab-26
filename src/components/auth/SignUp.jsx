@@ -16,12 +16,16 @@ const getErrorMessage = (error) => {
     return "Password must be at least 8 characters";
   if (errorStr.includes("otp") || errorStr.includes("code"))
     return "Invalid code. Please try again";
-  if (errorStr.includes("network") || errorStr.includes("connect"))
+  if (
+    errorStr.includes("network") ||
+    errorStr.includes("connect") ||
+    errorStr.includes("failed to fetch")
+  )
     return "Network error. Check your connection";
+  if (errorStr.includes("cors"))
+    return "Connection issue. Check your network and try again";
   if (errorStr.includes("json") || errorStr.includes("parse"))
     return "Something went wrong. Try again later";
-  if (errorStr.includes("timeout"))
-    return "Request took too long. Please try again";
 
   // For unknown errors, show generic user-friendly message
   return "Something went wrong. Please try again later";
@@ -36,6 +40,7 @@ const SignUp = ({ onSwitchToSignIn, onClose }) => {
   const [isResending, setIsResending] = useState(false);
   const [userEmail, setUserEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -329,9 +334,8 @@ const SignUp = ({ onSwitchToSignIn, onClose }) => {
 
   const handleGoogleSignUp = async (e) => {
     e.preventDefault();
+    setIsGoogleLoading(true);
     try {
-      showToast("Redirecting to Google...", "success");
-
       const currentOrigin =
         window.location.origin || import.meta.env.VITE_FRONTEND_URL;
 
@@ -341,6 +345,7 @@ const SignUp = ({ onSwitchToSignIn, onClose }) => {
         redirectTo: currentOrigin,
       });
     } catch (error) {
+      setIsGoogleLoading(false);
       console.error("Google signup error:", error);
       showToast(getErrorMessage(error), "error");
     }
@@ -521,7 +526,7 @@ const SignUp = ({ onSwitchToSignIn, onClose }) => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row md:min-h-162.5 tracking-wide">
+    <div className="flex flex-col md:flex-row tracking-wide">
       {/* Left side - Brand/Image */}
       <div className="hidden md:flex md:w-1/2 items-start justify-start p-6 text-white text-center relative bg-gray-900 rounded-l-lg">
         <span className="text-xl font-semibold z-10 relative select-none">
@@ -536,7 +541,7 @@ const SignUp = ({ onSwitchToSignIn, onClose }) => {
 
       {/* Right side - Form content */}
       <div className="w-full md:w-1/2 flex flex-col bg-white rounded-r-lg relative">
-        <div className="flex items-center justify-center pt-16 p-6 flex-1">
+        <div className="flex items-center justify-center pt-14 p-6 flex-1">
           <div className="w-full">
             {/* back button */}
             {currentStep > 1 && (
@@ -546,7 +551,7 @@ const SignUp = ({ onSwitchToSignIn, onClose }) => {
                 exit={{ opacity: 0, x: 10 }} // Slides out when going back to Step 1
                 transition={{ duration: 0.2 }}
                 onClick={prevStep}
-                className="absolute top-6 left-6 text-gray-500 hover:text-[#3C0919] flex items-center gap-1 transition-colors text-sm font-medium z-20"
+                className="absolute top-6 left-6 cursor-pointer text-gray-500 hover:text-[#3C0919] flex items-center gap-1 transition-colors text-sm font-medium z-20"
               >
                 <svg
                   className="w-5 h-5"
@@ -566,7 +571,7 @@ const SignUp = ({ onSwitchToSignIn, onClose }) => {
             )}
 
             <div className="mb-3 sm:mb-5">
-              <h2 className="text-3xl sm:text-4xl font-semibold text-gray-900">
+              <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900">
                 Create Your Account
               </h2>
               <p className="text-gray-500 text-sm sm:text-lg font-medium">
@@ -620,9 +625,9 @@ const SignUp = ({ onSwitchToSignIn, onClose }) => {
                 onClick={handleGoogleSignUp}
                 type="button"
                 className="p-2 sm:p-3 border-2 -mt-2 md:-mt-3 border-gray-600 text-lg sm:text-xl font-medium cursor-pointer transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed hover:bg-[#3c09191e]"
-                disabled={isLoading || currentStep > 2}
+                disabled={isLoading || isGoogleLoading || currentStep > 2}
               >
-                Continue with Google
+                {isGoogleLoading ? "Processing..." : "Continue with Google"}
               </button>
             </form>
 

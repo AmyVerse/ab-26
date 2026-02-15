@@ -12,7 +12,7 @@ function Footer() {
   const quickLinks = [
     { label: "Home", href: "/" },
     { label: "About", href: "/about" },
-    { label: "Events", href: "/explore#competitions" },
+    { label: "Events", href: "/events#competitions" },
     { label: "Passes & Stay", href: "/passes" },
     { label: "Sponsors", href: "/sponsors" },
     { label: "Teams", href: "/teams" },

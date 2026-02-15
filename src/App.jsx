@@ -1,5 +1,5 @@
-import Lenis from "lenis";
 import { Analytics } from "@vercel/analytics/react";
+import Lenis from "lenis";
 import { useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { AuthModalProvider } from "./components/auth/ModalAuthLayout";
@@ -8,18 +8,19 @@ import Navbar from "./components/common/Navbar/Navbar";
 import NotFound from "./components/not-found/NotFound";
 import { ToastProvider } from "./contexts/ToastContext";
 import About from "./pages/About";
+import CancellationAndRefunds from "./pages/CancellationAndRefunds";
 import Contact from "./pages/Contact";
+import Developers from "./pages/Developers";
 import Explore from "./pages/Explore";
 import Home from "./pages/Home";
 import PassesStay from "./pages/PassesStay";
-import Sponsors from "./pages/Sponsors";
-import Teams from "./pages/Teams";
-import Developers from "./pages/Developers";
-import TestPay from "./pages/TestPay";
-import TermsAndConditions from "./pages/TermsAndConditions";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import ShippingPolicy from "./pages/ShippingPolicy";
-import CancellationAndRefunds from "./pages/CancellationAndRefunds";
+import Sponsors from "./pages/Sponsors";
+import Teams from "./pages/Teams";
+import TermsAndConditions from "./pages/TermsAndConditions";
+import TestPay from "./pages/TestPay";
+import UserData from "./pages/UserData";
 
 function App() {
   // useEffect(() => {
@@ -82,7 +83,7 @@ function App() {
             <Route path="/sponsors" element={<Sponsors />} />
             <Route path="/teams" element={<Teams />} />
             <Route path="/developers" element={<Developers />} />
-            <Route path="/explore" element={<Explore />} />
+            <Route path="/events" element={<Explore />} />
             <Route path="/about" element={<About />} />
             <Route path="/passes" element={<PassesStay />} />
             <Route path="/contact" element={<Contact />} />
@@ -91,6 +92,7 @@ function App() {
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/shipping" element={<ShippingPolicy />} />
             <Route path="/cancellation" element={<CancellationAndRefunds />} />
+            <Route path="/myaccount" element={<UserData />} />
           </Routes>
 
           <Footer />

@@ -15,7 +15,6 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-
   const handleLogout = async () => {
     try {
       await signOut();
@@ -30,7 +29,7 @@ const Navbar = () => {
   const titles = {
     "/": "Abhivyakti 26",
     "/about": "About Us | Abhivyakti 26",
-    "/explore": "Explore | Abhivyakti 26",
+    "/events": "Events | Abhivyakti 26",
     "/sponsors": "Sponsors | Abhivyakti 26",
     "/teams": "Teams | Abhivyakti 26",
     // "/contact": "Contact Us | Abhivyakti 26",
@@ -56,7 +55,7 @@ const Navbar = () => {
   const navLinks = [
     { path: "/", label: "Home" },
     { path: "/about", label: "About" },
-    { path: "/explore", label: "Explore" },
+    { path: "/events", label: "Events" },
     { path: "/passes", label: "Passes & Stay" },
     { path: "/sponsors", label: "Sponsors" },
     { path: "/teams", label: "Team" },
@@ -73,13 +72,9 @@ const Navbar = () => {
     setIsMobileMenuOpen(false);
   };
 
-  if (isLoading) {
-    return <div className="bg-red-200 w-5xl"></div>;
-  }
-
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-9999 bg-linear-to-b from-black to-black/10 backdrop-blur-sm tracking-wider">
+      <nav className="fixed top-0 left-0 right-0 z-999 bg-linear-to-b from-black to-black/10 backdrop-blur-sm tracking-wider">
         <div className="mx-auto px-6 sm:px-8 lg:px-10">
           <div className="hidden md:flex justify-between items-center h-20 w-full">
             <div
@@ -248,7 +243,7 @@ const Navbar = () => {
                 <>
                   <button
                     onClick={() => openAuth("signup")}
-                    className="text-white hover:text-gray-300 transition-colors font-medium cursor-pointer"
+                    className="text-white hover:text-gray-300 transition-colors font-medium cursor-pointer whitespace-nowrap"
                   >
                     Sign Up
                   </button>
@@ -283,19 +278,23 @@ const Navbar = () => {
             </button>
 
             <div className="absolute left-1/2 transform -translate-x-1/2">
-              <div className="w-12 h-12 rounded-full flex items-center justify-center">
+              <button
+                className="w-12 h-12 rounded-full flex items-center justify-center"
+                onClick={() => navigate("/")}
+              >
                 <img
                   src="/mainlogo.png"
                   className="w-full h-full object-contain"
                 />
-              </div>
+              </button>
             </div>
 
             {isLoading ? (
               <div className="w-8 h-8 rounded-full bg-gray-600 animate-pulse"></div>
             ) : isAuthenticated ? (
-              <div
-                className="w-8 h-8 rounded-full bg-linear-to-br from-yellow-400 to-yellow-600 flex items-center justify-center text-white font-semibold cursor-pointer"
+              <button
+                onClick={() => navigate("/myaccount")}
+                className="w-8 h-8 rounded-full bg-linear-to-br from-yellow-400 to-yellow-600 flex items-center justify-center text-white font-semibold cursor-pointer hover:shadow-[0_0_15px_rgba(234,179,8,0.4)] transition-all duration-200"
                 title={user?.name || user?.firstName || "Profile"}
               >
                 {(
@@ -303,7 +302,7 @@ const Navbar = () => {
                   user?.firstName?.charAt(0) ||
                   "U"
                 ).toUpperCase()}
-              </div>
+              </button>
             ) : (
               <button
                 onClick={() => openAuth("signin")}

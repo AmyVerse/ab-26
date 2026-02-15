@@ -83,7 +83,7 @@ const ModalAuthLayout = () => {
               damping: 30,
               mass: 0.8,
             }}
-            className="relative bg-white rounded-lg shadow-xl w-7xl overflow-y-auto"
+            className="relative bg-white rounded-lg shadow-xl max-w-6xl w-full h-fit sm:max-h-[75vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             {/* close button */}

@@ -1,239 +1,334 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import { useAuth } from "../../contexts/AuthProvider";
 import { useToast } from "../../contexts/ToastContext";
+import { getEventById } from "../../lib/event-client";
 import {
+  isUserRegisteredForEvent,
   registerForIndividualEvent,
-  registerTeamForEvent,
 } from "../../lib/registration-client";
+import { createTeam } from "../../lib/team-client";
 import { useAuthModal } from "../auth/ModalAuthLayout";
-
-// Helper function to convert technical errors to user-friendly messages
-const getErrorMessage = (error) => {
-  const errorStr = error?.message?.toLowerCase() || "";
-
-  if (errorStr.includes("already")) return "Already registered for this event";
-  if (errorStr.includes("abid") || errorStr.includes("member"))
-    return "Please check team member details";
-  if (errorStr.includes("team")) return "Team registration failed. Try again";
-  if (errorStr.includes("network") || errorStr.includes("connect"))
-    return "Network error. Check your connection";
-  if (errorStr.includes("validate")) return "Please enter valid information";
-  if (errorStr.includes("json") || errorStr.includes("parse"))
-    return "Registration failed. Try again later";
-
-  return "Registration failed. Try again later";
-};
 
 const styles = {
   overlay:
-    "fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center z-50",
+    "fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center z-999 p-4",
   modal:
-    "bg-[#0f0f0f] rounded-2xl border border-yellow-500/20 shadow-2xl max-w-2xl w-full max-h-[80vh] overflow-y-auto",
+    "bg-[#0f0f0f] rounded-2xl border border-yellow-500/20 shadow-2xl w-[90vw] md:w-full md:max-w-2xl max-h-[80vh] overflow-y-auto",
   header:
-    "sticky top-0 flex justify-between items-center px-6 py-5 border-b border-white/10 bg-linear-to-r from-yellow-900/20 to-transparent",
+    "sticky top-0 flex justify-between items-center px-6 py-5 border-b border-white/10 bg-gradient-to-r from-yellow-900/20 to-transparent",
   title: "text-2xl font-bold text-white",
   closeBtn:
     "text-gray-400 hover:text-white p-1 rounded-full hover:bg-white/10 transition-colors cursor-pointer",
   section: "p-6 space-y-4",
-  sectionTitle: "text-lg font-semibold text-white",
-  buttonGroup: "flex gap-3",
-  button:
-    "flex-1 px-4 py-2.5 rounded-lg font-semibold transition-all duration-200",
-  primaryBtn:
-    "bg-yellow-500 text-black hover:bg-yellow-400 hover:shadow-lg hover:shadow-yellow-500/50",
-  secondaryBtn:
-    "bg-white/10 text-white hover:bg-white/20 border border-white/20",
+  sectionTitle: "text-lg font-semibold text-white mb-2",
   label: "block text-sm font-medium text-gray-300 mb-2",
   input:
     "w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-yellow-500/50 focus:ring-1 focus:ring-yellow-500/20 transition",
-  teamMemberRow:
-    "flex gap-4 items-center bg-white/5 p-4 rounded-lg border border-white/10",
-  passStatus: "flex items-center gap-2",
-  submitBtn:
+  textarea:
+    "w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-yellow-500/50 focus:ring-1 focus:ring-yellow-500/20 transition resize-none",
+  button:
     "w-full px-4 py-2.5 bg-yellow-500 text-black rounded-lg font-semibold hover:bg-yellow-400 hover:shadow-lg hover:shadow-yellow-500/50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed",
-  errorText: "text-red-400 text-sm",
+  secondaryBtn:
+    "w-full px-4 py-2.5 bg-white/10 text-white rounded-lg font-semibold hover:bg-white/20 border border-white/20 transition-all duration-200",
+  infoText: "text-sm text-gray-400",
 };
 
-export default function RegistrationModal({
-  eventId,
-  eventName,
-  maxTeamSize = 1,
-  minTeamSize = 1,
-  onClose,
-  onCloseEvent,
-}) {
+export default function RegistrationModal({ eventId, onClose, onSuccess }) {
   const { user, isAuthenticated } = useAuth();
   const { showToast } = useToast();
   const { openAuth } = useAuthModal();
 
   // State management
-  const [registrationMode, setRegistrationMode] = useState(null);
-  const [teamMembers, setTeamMembers] = useState([]);
-  const [teamId, setTeamId] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [event, setEvent] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [registering, setRegistering] = useState(false);
 
-  // Initialize team members array
+  // Individual registration state
+  const [submissionString, setSubmissionString] = useState("");
+
+  // Team registration state
+  const [teamName, setTeamName] = useState("");
+  const [isTeamLeader, setIsTeamLeader] = useState(false);
+
+  // Load event data on mount
   useEffect(() => {
-    if (registrationMode === "create" && maxTeamSize > 1) {
-      const initialMembers = Array(minTeamSize)
-        .fill(null)
-        .map((_, idx) => ({
-          abid: idx === 0 ? user?.abid || "" : "",
-          hasPass: idx === 0 ? "yes" : "no",
-          isLeader: idx === 0,
-        }));
-      setTeamMembers(initialMembers);
+    if (!eventId) return;
+
+    const loadEvent = async () => {
+      try {
+        setLoading(true);
+        const result = await getEventById(eventId);
+
+        if (result.success) {
+          setEvent(result.event);
+        } else {
+          showToast(result.error || "Failed to load event", "error");
+        }
+      } catch (err) {
+        console.error("Error loading event:", err);
+        showToast("Failed to load event", "error");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadEvent();
+  }, [eventId, showToast]);
+
+  // Check authentication on mount
+  useEffect(() => {
+    if (!isAuthenticated) {
+      showToast("Please login to register", "error");
+      openAuth("signin");
+      onClose();
     }
-  }, [registrationMode, minTeamSize, maxTeamSize, user]);
+  }, [isAuthenticated, showToast, openAuth, onClose]);
 
-  // Check authentication
-  if (!isAuthenticated) {
-    showToast("Please login to start Registeration", "error");
-    onCloseEvent?.();
-    openAuth("signin");
+  // Check if user is team leader (has participated as leader before)
+  useEffect(() => {
+    if (!user || !eventId || !event?.isTeamEvent) return;
 
-    return null;
-  }
+    const checkTeamLeader = async () => {
+      const isRegistered = await isUserRegisteredForEvent(user.id, eventId);
+      setIsTeamLeader(isRegistered); // If they're registered, they can be leader
+    };
 
-  // Handle adding more team members
-  const addTeamMember = () => {
-    if (teamMembers.length < maxTeamSize) {
-      setTeamMembers([
-        ...teamMembers,
-        { abid: "", hasPass: "no", isLeader: false },
-      ]);
-    }
-  };
+    checkTeamLeader();
+  }, [user, eventId, event]);
 
-  // Handle updating team member
-  const updateTeamMember = (idx, field, value) => {
-    const updated = [...teamMembers];
-    updated[idx][field] = value;
-    setTeamMembers(updated);
-  };
-
-  // Handle team member removal
-  const removeTeamMember = (idx) => {
-    if (idx === 0) {
-      showToast("Cannot remove team leader", "error");
-      return;
-    }
-    setTeamMembers(teamMembers.filter((_, i) => i !== idx));
-  };
-
-  // Handle solo registration
-  const handleSoloRegister = async () => {
+  // Handle individual registration
+  const handleIndividualRegister = async () => {
     try {
-      setLoading(true);
-      setError("");
+      setRegistering(true);
+
+      // Check if already registered
+      const alreadyRegistered = await isUserRegisteredForEvent(
+        user.id,
+        eventId,
+      );
+      if (alreadyRegistered) {
+        showToast("Already registered for this event", "error");
+        setRegistering(false);
+        return;
+      }
+
+      // Register (submission string is optional)
       const result = await registerForIndividualEvent(
         user.id,
         eventId,
-        "solo_registration",
+        submissionString || "",
       );
 
       if (result.success) {
         showToast("Successfully registered!", "success");
-        onClose();
+        if (onSuccess) onSuccess();
+        setTimeout(() => onClose(), 800);
       } else {
-        const errorMsg = result.error || "Registration failed";
-        showToast(errorMsg, "error");
-        setError(errorMsg);
+        showToast(result.error || "Registration failed", "error");
       }
     } catch (err) {
       console.error("Registration error:", err);
-      const errorMsg = getErrorMessage(err);
-      showToast(errorMsg, "error");
-      setError(errorMsg);
+      showToast("Registration error", "error");
     } finally {
-      setLoading(false);
+      setRegistering(false);
     }
   };
 
-  // Handle team creation and registration
-  const handleCreateTeam = async () => {
+  // Handle team registration
+  const handleTeamRegister = async () => {
     try {
-      setLoading(true);
-      setError("");
-
-      if (teamMembers.some((m) => !m.abid?.trim())) {
-        const errorMsg = "All team members must have an ABID";
-        showToast(errorMsg, "error");
-        setError(errorMsg);
+      if (!teamName.trim()) {
+        showToast("Please enter a team name", "error");
         return;
       }
 
-      if (
-        teamMembers.length < minTeamSize ||
-        teamMembers.length > maxTeamSize
-      ) {
-        const errorMsg = `Team size must be between ${minTeamSize} and ${maxTeamSize}`;
-        showToast(errorMsg, "error");
-        setError(errorMsg);
-        return;
-      }
+      setRegistering(true);
 
-      const membersList = teamMembers.map((m) => m.abid).join(",");
-      const result = await registerTeamForEvent(
+      // Check if already registered
+      const alreadyRegistered = await isUserRegisteredForEvent(
         user.id,
-        `team_${Date.now()}`,
-        membersList,
+        eventId,
       );
-
-      if (result.success) {
-        showToast("Team registered successfully!", "success");
-        onClose();
-      } else {
-        const errorMsg = result.error || "Team registration failed";
-        showToast(errorMsg, "error");
-        setError(errorMsg);
-      }
-    } catch (err) {
-      console.error("Team registration error:", err);
-      const errorMsg = getErrorMessage(err);
-      showToast(errorMsg, "error");
-      setError(errorMsg);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Handle joining existing team
-  const handleJoinTeam = async () => {
-    try {
-      setLoading(true);
-      setError("");
-
-      if (!teamId.trim()) {
-        const errorMsg = "Please enter a team ID";
-        showToast(errorMsg, "error");
-        setError(errorMsg);
+      if (alreadyRegistered) {
+        showToast("Already registered for this event", "error");
+        setRegistering(false);
         return;
       }
 
-      const result = await registerTeamForEvent(user.id, teamId, user.abid);
+      // Create team
+      const result = await createTeam({
+        userId: user.id,
+        eventId,
+        teamName: teamName.trim(),
+      });
 
       if (result.success) {
-        showToast("Successfully joined team!", "success");
-        onClose();
+        showToast("Team created successfully!", "success");
+        if (onSuccess) onSuccess();
+        setTimeout(() => onClose(), 800);
       } else {
-        const errorMsg = result.error || "Failed to join team";
-        showToast(errorMsg, "error");
-        setError(errorMsg);
+        showToast(result.error || "Team creation failed", "error");
       }
     } catch (err) {
-      console.error("Join team error:", err);
-      const errorMsg = getErrorMessage(err);
-      showToast(errorMsg, "error");
-      setError(errorMsg);
+      console.error("Team creation error:", err);
+      showToast("Team creation error", "error");
     } finally {
-      setLoading(false);
+      setRegistering(false);
     }
   };
 
+  // Loading state
+  if (loading) {
+    return (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className={styles.overlay}
+        onClick={onClose}
+      >
+        <motion.div
+          initial={{ scale: 0.95, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.95, opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          className={styles.modal}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className={styles.header}>
+            <h2 className={styles.title}>Loading...</h2>
+            <button className={styles.closeBtn} onClick={onClose}>
+              <FaTimes className="w-6 h-6" />
+            </button>
+          </div>
+          <div className={styles.section}>
+            <p className="text-gray-400">Loading event details...</p>
+          </div>
+        </motion.div>
+      </motion.div>
+    );
+  }
+
+  // Not authenticated
+  if (!isAuthenticated) {
+    return null;
+  }
+
+  // Event not found
+  if (!event) {
+    return (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className={styles.overlay}
+        onClick={onClose}
+      >
+        <motion.div
+          initial={{ scale: 0.95, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.95, opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          className={styles.modal}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className={styles.header}>
+            <h2 className={styles.title}>Event Not Found</h2>
+            <button className={styles.closeBtn} onClick={onClose}>
+              <FaTimes className="w-6 h-6" />
+            </button>
+          </div>
+          <div className={styles.section}>
+            <p className="text-red-400">Could not load event details</p>
+            <button onClick={onClose} className={styles.secondaryBtn}>
+              Close
+            </button>
+          </div>
+        </motion.div>
+      </motion.div>
+    );
+  }
+
+  // Individual Event Registration
+  if (!event.isTeamEvent) {
+    return (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className={styles.overlay}
+        onClick={onClose}
+      >
+        <motion.div
+          initial={{ scale: 0.95, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.95, opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          className={styles.modal}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className={styles.header}>
+            <h2 className={styles.title}>{event.name}</h2>
+            <button className={styles.closeBtn} onClick={onClose}>
+              <FaTimes className="w-6 h-6" />
+            </button>
+          </div>
+
+          <div className={styles.section}>
+            {/* Event info */}
+            <div>
+              <p className={styles.infoText}>
+                <span className="text-gray-300 font-medium">Club:</span>{" "}
+                {event.club}
+              </p>
+              <p className={styles.infoText + " mt-2"}>
+                Register for this event now.
+              </p>
+            </div>
+
+            {/* Submission input */}
+            <div>
+              <label className="block text-base font-medium text-gray-300 mb-2">
+                Submission Link{" "}
+                <span className="text-gray-400 text-sm font-normal">
+                  (Optional)
+                </span>
+              </label>
+              <textarea
+                rows="4"
+                placeholder="Paste your submission link (Google Drive, GitHub, etc.)"
+                value={submissionString}
+                onChange={(e) => setSubmissionString(e.target.value)}
+                disabled={registering}
+                className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white text-base placeholder-gray-500 focus:outline-none focus:border-yellow-500/50 focus:ring-1 focus:ring-yellow-500/20 transition resize-none disabled:opacity-50"
+              />
+              <p className="text-sm text-gray-400 mt-1">
+                You can add submission details after registration if needed
+              </p>
+            </div>
+
+            {/* Register button */}
+            <button
+              onClick={handleIndividualRegister}
+              disabled={registering}
+              className={styles.button}
+            >
+              {registering ? "Registering..." : "Register Now"}
+            </button>
+
+            {/* Close button */}
+            <button onClick={onClose} className={styles.secondaryBtn}>
+              Cancel
+            </button>
+          </div>
+        </motion.div>
+      </motion.div>
+    );
+  }
+
+  // Team Event Registration
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -250,227 +345,60 @@ export default function RegistrationModal({
         className={styles.modal}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header */}
         <div className={styles.header}>
-          <h2 className={styles.title}>{eventName}</h2>
-          <button
-            className={styles.closeBtn}
-            onClick={onClose}
-            aria-label="Close"
-          >
+          <h2 className={styles.title}>{event.name}</h2>
+          <button className={styles.closeBtn} onClick={onClose}>
             <FaTimes className="w-6 h-6" />
           </button>
         </div>
 
-        {/* Content */}
         <div className={styles.section}>
-          {/* Error message */}
-          <AnimatePresence>
-            {error && (
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                className="p-4 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400 text-sm"
-              >
-                {error}
-              </motion.div>
+          {/* Event info */}
+          <div>
+            <p className={styles.infoText}>
+              <span className="text-gray-300 font-medium">Club:</span>{" "}
+              {event.club}
+            </p>
+            <p className={styles.infoText + " mt-2"}>
+              <span className="text-gray-300 font-medium">Team Size:</span>{" "}
+              {event.minTeamSize}-{event.maxTeamSize} members
+            </p>
+            {isTeamLeader && (
+              <p className="mt-3 p-3 bg-yellow-500/10 border border-yellow-500/20 rounded-lg text-yellow-400 text-sm">
+                You are registered as a team leader for this event
+              </p>
             )}
-          </AnimatePresence>
+          </div>
 
-          {/* Mode Selection */}
-          <AnimatePresence mode="wait">
-            {!registrationMode && (
-              <motion.div
-                key="mode-selection"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-              >
-                {maxTeamSize === 1 ? (
-                  // Solo event
-                  <div className="space-y-4">
-                    <p className="text-gray-300">
-                      This is a solo event. Click register to proceed.
-                    </p>
-                    <button
-                      onClick={handleSoloRegister}
-                      disabled={loading}
-                      className={styles.submitBtn}
-                    >
-                      {loading ? "Registering..." : "Register Now"}
-                    </button>
-                  </div>
-                ) : (
-                  // Team event
-                  <div className="space-y-4">
-                    <div>
-                      <h3 className={styles.sectionTitle}>
-                        Choose Registration Mode
-                      </h3>
-                      <p className="text-sm text-gray-400 mt-1">
-                        Team: {minTeamSize}-{maxTeamSize} members
-                      </p>
-                    </div>
-                    <div className={styles.buttonGroup}>
-                      <button
-                        onClick={() => setRegistrationMode("create")}
-                        className={`${styles.button} ${styles.primaryBtn}`}
-                      >
-                        Create Team
-                      </button>
-                      <button
-                        onClick={() => setRegistrationMode("join")}
-                        className={`${styles.button} ${styles.secondaryBtn}`}
-                      >
-                        Join Team
-                      </button>
-                    </div>
-                  </div>
-                )}
-              </motion.div>
-            )}
+          {/* Team name input */}
+          <div>
+            <label className={styles.label}>Team Name</label>
+            <input
+              type="text"
+              placeholder="Enter your team name"
+              value={teamName}
+              onChange={(e) => setTeamName(e.target.value)}
+              disabled={registering}
+              className={styles.input + " disabled:opacity-50"}
+            />
+            <p className={styles.infoText + " mt-1"}>
+              Choose a unique name for your team
+            </p>
+          </div>
 
-            {/* Create Team Mode */}
-            {registrationMode === "create" && (
-              <motion.div
-                key="create-team"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                className="space-y-4"
-              >
-                <div className="flex justify-between items-center">
-                  <h3 className={styles.sectionTitle}>Create Team</h3>
-                  <span className="text-sm text-yellow-400">
-                    {teamMembers.length}/{maxTeamSize}
-                  </span>
-                </div>
+          {/* Register button */}
+          <button
+            onClick={handleTeamRegister}
+            disabled={registering}
+            className={styles.button}
+          >
+            {registering ? "Creating Team..." : "Create Team"}
+          </button>
 
-                {/* Team Members List */}
-                <div className="space-y-3">
-                  {teamMembers.map((member, idx) => (
-                    <motion.div
-                      key={idx}
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      className={styles.teamMemberRow}
-                    >
-                      <div className="flex-1">
-                        <label className={styles.label}>
-                          {idx === 0
-                            ? "Team Leader (You)"
-                            : `Member ${idx + 1}`}
-                        </label>
-                        <input
-                          type="text"
-                          placeholder="ABI"
-                          onChange={(e) =>
-                            updateTeamMember(idx, "abid", e.target.value)
-                          }
-                          disabled={idx === 0}
-                          className={styles.input}
-                        />
-                      </div>
-
-                      {/* Pass Status */}
-                      <div className={styles.passStatus}>
-                        <label className={styles.label}>Pass</label>
-                        <select
-                          value={member.hasPass}
-                          onChange={(e) =>
-                            updateTeamMember(idx, "hasPass", e.target.value)
-                          }
-                          className="px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white text-sm focus:outline-none focus:border-yellow-500/50 transition"
-                        >
-                          <option value="yes">Yes</option>
-                          <option value="no">No</option>
-                        </select>
-                      </div>
-
-                      {/* Remove button */}
-                      {idx !== 0 && (
-                        <button
-                          onClick={() => removeTeamMember(idx)}
-                          className="text-red-400 hover:text-red-300 font-bold transition"
-                        >
-                          ✕
-                        </button>
-                      )}
-                    </motion.div>
-                  ))}
-                </div>
-
-                {/* Add member button */}
-                {teamMembers.length < maxTeamSize && (
-                  <button
-                    onClick={addTeamMember}
-                    className={`${styles.button} ${styles.secondaryBtn} w-full`}
-                  >
-                    + Add Member ({teamMembers.length}/{maxTeamSize})
-                  </button>
-                )}
-
-                {/* Submit & Back buttons */}
-                <div className={styles.buttonGroup}>
-                  <button
-                    onClick={() => setRegistrationMode(null)}
-                    className={`${styles.button} ${styles.secondaryBtn}`}
-                  >
-                    Back
-                  </button>{" "}
-                  <button
-                    onClick={handleCreateTeam}
-                    disabled={loading}
-                    className={`${styles.button} ${styles.primaryBtn}`}
-                  >
-                    {loading ? "Creating Team..." : "Create & Register"}
-                  </button>
-                </div>
-              </motion.div>
-            )}
-
-            {/* Join Team Mode */}
-            {registrationMode === "join" && (
-              <motion.div
-                key="join-team"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                className="space-y-4"
-              >
-                <h3 className={styles.sectionTitle}>Join Existing Team</h3>
-
-                <div>
-                  <label className={styles.label}>Team ID</label>
-                  <input
-                    type="text"
-                    placeholder="Enter team ID"
-                    value={teamId}
-                    onChange={(e) => setTeamId(e.target.value)}
-                    className={styles.input}
-                  />
-                </div>
-
-                {/* Submit & Back buttons */}
-                <div className="space-y-2">
-                  <button
-                    onClick={handleJoinTeam}
-                    disabled={loading}
-                    className={styles.submitBtn}
-                  >
-                    {loading ? "Joining..." : "Join Team"}
-                  </button>
-                  <button
-                    onClick={() => setRegistrationMode(null)}
-                    className={`${styles.button} ${styles.secondaryBtn} w-full`}
-                  >
-                    Back
-                  </button>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+          {/* Close button */}
+          <button onClick={onClose} className={styles.secondaryBtn}>
+            Cancel
+          </button>
         </div>
       </motion.div>
     </motion.div>

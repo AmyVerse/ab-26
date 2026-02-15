@@ -45,7 +45,7 @@ const Explore = () => {
             asset="https://assets.2026.abhivyaktifest.in/images/Home/PRO-SHOW-1.png"
             cta="Explore Shows"
             assetClass="bottom-[50px] sm:bottom-[55px] w-[200px] sm:w-[250px]"
-            onClick={() => navigate("/explore#proShows")}
+            onClick={() => navigate("/events#proShows")}
           />
 
           <ExploreCard
@@ -54,7 +54,7 @@ const Explore = () => {
             asset="https://assets.2026.abhivyaktifest.in/images/Home/dancer.png"
             cta="Compete Now"
             assetClass="bottom-[20px] sm:bottom-[25px] w-[110px] sm:w-[130px]"
-            onClick={() => navigate("/explore#competitions")}
+            onClick={() => navigate("/events#competitions")}
           />
 
           <ExploreCard
@@ -63,7 +63,7 @@ const Explore = () => {
             asset="https://assets.2026.abhivyaktifest.in/images/Home/STREET-ACTIVITY-IMAGE.png"
             cta="Join the Fun"
             assetClass="bottom-[35px] sm:bottom-[40px] w-[100px] sm:w-[110px]"
-            onClick={() => navigate("/explore#streetActivity")}
+            onClick={() => navigate("/events#streetActivity")}
           />
         </div>
 
